@@ -44,7 +44,7 @@ public class AnularCita extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_citas = new javax.swing.JTable();
         jbtn_cancelar = new javax.swing.JButton();
-        jbtn_anularCita = new javax.swing.JButton();
+        jbtn_anular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Anulando Cita");
@@ -103,20 +103,20 @@ public class AnularCita extends javax.swing.JFrame {
         });
         jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 170, 50));
 
-        jbtn_anularCita.setText("ANULAR CITA");
-        jbtn_anularCita.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_anular.setText("ANULAR CITA");
+        jbtn_anular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_anularCitaActionPerformed(evt);
+                jbtn_anularActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtn_anularCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 170, 50));
+        jPanel2.add(jbtn_anular, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 170, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtn_anularCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_anularCitaActionPerformed
+    private void jbtn_anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_anularActionPerformed
         // TODO add your handling code here:
         String rutUsuario = jtxt_rutDelUsuario.getText();
         int selectdRow = jtbl_citas.getSelectedRow();
@@ -135,7 +135,7 @@ public class AnularCita extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione una cita para anular.");
         }
         
-    }//GEN-LAST:event_jbtn_anularCitaActionPerformed
+    }//GEN-LAST:event_jbtn_anularActionPerformed
 
     private void jtxt_rutDelUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_rutDelUsuarioActionPerformed
         // TODO add your handling code here:
@@ -194,7 +194,7 @@ public class AnularCita extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtn_anularCita;
+    private javax.swing.JButton jbtn_anular;
     private javax.swing.JButton jbtn_cancelar;
     private javax.swing.JButton jbtn_ok;
     private javax.swing.JTable jtbl_citas;
