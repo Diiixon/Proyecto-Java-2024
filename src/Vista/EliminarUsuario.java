@@ -6,7 +6,10 @@
 package Vista;
 
 import Controlador.Metodos;
+import Modelo.Usuario;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,10 +40,10 @@ public class EliminarUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jtxt_rutUsuario = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtbl_usuarios = new javax.swing.JTable();
         jbtn_eliminar = new javax.swing.JButton();
         jbtn_cancelar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbtn_buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminando Usuario");
@@ -69,7 +72,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
         });
         jPanel2.add(jtxt_rutUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 310, 30));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtbl_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -85,9 +88,9 @@ public class EliminarUsuario extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtbl_usuarios);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 690, 110));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 690, 110));
 
         jbtn_eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_eliminar.setText("Eliminar");
@@ -100,16 +103,21 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
         jbtn_cancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_cancelar.setText("Cancelar");
-        jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtn_cancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
+        jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+
+        jbtn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_buscar.setText("Buscar");
+        jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_buscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbtn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
@@ -143,9 +151,39 @@ public class EliminarUsuario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbtn_eliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        int dia, mes, ano, telefono;
+        String rut, nombre, correo, fecNac;
+        
+        Metodos metodos = new Metodos();
+        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_usuarios.getModel();
+        
+        modelo.setRowCount(0);
+        
+        ArrayList<Usuario> lista = metodos.buscarUsuario(this.jtxt_rutUsuario.getText());
+        
+        for (Usuario usuario : lista) {
+            dia = usuario.getDia();
+            mes = usuario.getMes();
+            ano = usuario.getAno();
+            fecNac = dia+"-"+mes+"-"+ano;
+            rut = usuario.getNumRut();
+            nombre = usuario.getNombre();
+            correo = usuario.getCorreo();
+            telefono = usuario.getNumTelefono();
+            
+            modelo.addRow(new Object [] {rut, nombre, correo, telefono, fecNac});
+            
+        }
+        
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
+
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,15 +221,15 @@ public class EliminarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtn_buscar;
     private javax.swing.JButton jbtn_cancelar;
     private javax.swing.JButton jbtn_eliminar;
+    private javax.swing.JTable jtbl_usuarios;
     private javax.swing.JTextField jtxt_rutUsuario;
     // End of variables declaration//GEN-END:variables
 

@@ -142,6 +142,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jmi_eliminarUsuario);
 
         jmi_eliminarMedico.setText("Eliminar Médico");
+        jmi_eliminarMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarMedicoActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmi_eliminarMedico);
 
         jmi_eliminarEspecialidad.setText("Eliminar Especialidad");
@@ -222,6 +227,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jmi_eliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarEspecialidadActionPerformed
         // TODO add your handling code here:
+        EliminarEspecialidad ee = new EliminarEspecialidad();
+        ee.setVisible(true);
     }//GEN-LAST:event_jmi_eliminarEspecialidadActionPerformed
 
     private void jmi_verUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verUsuariosActionPerformed
@@ -244,6 +251,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         EliminarUsuario eu = new EliminarUsuario();
         eu.setVisible(true);
     }//GEN-LAST:event_jmi_eliminarUsuarioActionPerformed
+
+    private void jmi_eliminarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarMedicoActionPerformed
+        // TODO add your handling code here:
+        EliminarMedico em = new EliminarMedico();
+        em.setVisible(true);
+    }//GEN-LAST:event_jmi_eliminarMedicoActionPerformed
 
     /**
      * @param args the command line arguments

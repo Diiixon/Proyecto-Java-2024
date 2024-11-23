@@ -81,6 +81,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar M&#xe9;dico"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmi_eliminarMedicoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmi_eliminarEspecialidad">
               <Properties>
