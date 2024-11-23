@@ -16,6 +16,7 @@ public class Persona {
     protected String correo;
     protected int numTelefono;
     //sexo descartado
+    //nuevo comentario
 
     public Persona() {
     }
