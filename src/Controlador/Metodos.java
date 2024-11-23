@@ -387,7 +387,7 @@ public class Metodos {
         return lista;
     }
     
-    public ArrayList<Especialidad> buscarEspecialidad(int id)
+    public ArrayList<Especialidad> buscarEspecialidad(String id)
     {
         ArrayList<Especialidad> lista = new ArrayList<>();
         try {
@@ -397,7 +397,7 @@ public class Metodos {
             String query = "SELECT * FROM MEDICO WHERE numrut_medico = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
             
-            stmt.setInt(1, id);
+            stmt.setString(1, id);
             
             ResultSet rs = stmt.executeQuery();
             

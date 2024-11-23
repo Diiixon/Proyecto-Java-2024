@@ -121,7 +121,7 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        int id;
+        String id;
         String descEspecialidad;
         
         Metodos metodos = new Metodos();
@@ -129,10 +129,10 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         
         modelo.setRowCount(0);
         
-        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(Integer.parseInt(this.jtxt_idEspecialidad.getText()));
+        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(this.jtxt_idEspecialidad.getText());
         
         for (Especialidad especialidad : lista) {
-            id = especialidad.getIdEspecialidad();
+            id = String.valueOf(especialidad.getIdEspecialidad());
             descEspecialidad = especialidad.getDescEspecialidad();
             
             modelo.addRow(new Object [] {id,descEspecialidad});
