@@ -2,26 +2,28 @@ package BaseDatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 /**
  *
  * @author Dixon Tapia Aguilera
  */
 public class ConexionBaseDatos {
+    static String url = "jdbc:mysql://proyectojava.c6qc4fmw5hv7.us-east-1.rds.amazonaws.com:3306/proyectojava";
+    static String usuario = "admin";
+    static String contrasena ="Dangerous2506";
     
-    public Connection conectar()
-    {
-        Connection conexion = null;
+    public static Connection conectar(){
         
+        Connection con = null;
         try {
-            
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectojava","root","3597");
-            System.out.println("\nConectado a la Base de Datos!");
-            
-        } catch (Exception e) {
-            System.out.println("\nImposible conectar a la Base de Datos!");
-        }return conexion;
+            con = DriverManager.getConnection(url,usuario,contrasena);
+            System.out.println("Conexion exitosa ");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return con;
     }
+    
+    
 
 }
