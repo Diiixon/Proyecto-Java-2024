@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.Metodos;
+
 /**
  *
  * @author benja
@@ -35,10 +37,10 @@ public class HoraDisponible extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jtxt_especialidad = new javax.swing.JTextField();
+        jtb_Disponible = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbtn_Buscar = new javax.swing.JButton();
+        jcbx_Especialidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,7 +66,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(167, 219, 216));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtb_Disponible.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,24 +74,51 @@ public class HoraDisponible extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha", "Hora", "Nombre", "Especialidad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtb_Disponible);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 710, 160));
-        jPanel4.add(jtxt_especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 50, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Especialidad");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 100, -1));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 150, -1));
 
-        jButton1.setText("jButton1");
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, -1, -1));
+        jbtn_Buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_Buscar.setText("Buscar");
+        jbtn_Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_BuscarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, -1, -1));
+
+        jcbx_Especialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "a" }));
+        jcbx_Especialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbx_EspecialidadActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jcbx_Especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 290, 30));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_BuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtn_BuscarActionPerformed
+
+    private void jcbx_EspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbx_EspecialidadActionPerformed
+        int id;
+        String especialidad;
+        
+        Metodos metodos = new Metodos();
+        
+        metodos.mostrarEspecialidad()
+    }//GEN-LAST:event_jcbx_EspecialidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,7 +156,6 @@ public class HoraDisponible extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -135,7 +163,8 @@ public class HoraDisponible extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jtxt_especialidad;
+    private javax.swing.JButton jbtn_Buscar;
+    private javax.swing.JComboBox<String> jcbx_Especialidad;
+    private javax.swing.JTable jtb_Disponible;
     // End of variables declaration//GEN-END:variables
 }
