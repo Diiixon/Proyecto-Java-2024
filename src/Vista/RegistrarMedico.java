@@ -18,6 +18,9 @@ public class RegistrarMedico extends javax.swing.JFrame {
      */
     public RegistrarMedico() {
         initComponents();
+        setSize(900,600);
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -46,7 +49,6 @@ public class RegistrarMedico extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(167, 219, 216));
@@ -77,7 +79,7 @@ public class RegistrarMedico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("RUT:");

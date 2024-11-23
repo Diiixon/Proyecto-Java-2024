@@ -20,6 +20,9 @@ public class ListarMedicos extends javax.swing.JFrame {
      */
     public ListarMedicos() {
         initComponents();
+        setSize(900,600);
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,9 +39,10 @@ public class ListarMedicos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_medicos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jbtn_mostrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Mostrando Médicos");
         setMinimumSize(new java.awt.Dimension(900, 600));
         setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
@@ -91,16 +95,16 @@ public class ListarMedicos extends javax.swing.JFrame {
             jtbl_medicos.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 740, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 740, 340));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Mostrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_mostrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_mostrar.setText("Mostrar");
+        jbtn_mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtn_mostrarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
+        jPanel1.add(jbtn_mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,13 +114,13 @@ public class ListarMedicos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_mostrarActionPerformed
         // TODO add your handling code here:
         
         int id, telefono;
@@ -138,7 +142,7 @@ public class ListarMedicos extends javax.swing.JFrame {
             modelo.addRow(new Object [] {id, rut, nombre, correo, telefono});
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtn_mostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,11 +180,11 @@ public class ListarMedicos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtn_mostrar;
     private javax.swing.JTable jtbl_medicos;
     // End of variables declaration//GEN-END:variables
 }

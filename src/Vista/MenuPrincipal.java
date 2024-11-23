@@ -15,6 +15,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        setSize(900,600);
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -37,6 +40,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jmi_verUsuarios = new javax.swing.JMenuItem();
+        jmi_verMedicos = new javax.swing.JMenuItem();
+        jmi_verEspecialidades = new javax.swing.JMenuItem();
+        jmi_eliminarUsuario = new javax.swing.JMenuItem();
+        jmi_eliminarMedico = new javax.swing.JMenuItem();
+        jmi_eliminarEspecialidad = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -57,20 +66,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("Reservar Cita");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 200, 100));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 200, 100));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Anular Cita");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 200, 100));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 200, 100));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("Ver Médicos");
+        jButton3.setText("Horas Disponibles");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 200, 100));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 200, 100));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(116, 30));
 
@@ -99,6 +108,49 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem4);
+
+        jmi_verUsuarios.setText("Ver Usuarios");
+        jmi_verUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_verUsuariosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmi_verUsuarios);
+
+        jmi_verMedicos.setText("Ver Médicos");
+        jmi_verMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_verMedicosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmi_verMedicos);
+
+        jmi_verEspecialidades.setText("Ver Especialidades");
+        jmi_verEspecialidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_verEspecialidadesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmi_verEspecialidades);
+
+        jmi_eliminarUsuario.setText("Eliminar Usuario");
+        jmi_eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmi_eliminarUsuario);
+
+        jmi_eliminarMedico.setText("Eliminar Médico");
+        jMenu1.add(jmi_eliminarMedico);
+
+        jmi_eliminarEspecialidad.setText("Eliminar Especialidad");
+        jmi_eliminarEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarEspecialidadActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmi_eliminarEspecialidad);
 
         jMenuBar1.add(jMenu1);
 
@@ -158,9 +210,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jmi_verMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verMedicosActionPerformed
+        // TODO add your handling code here:
+        
         ListarMedicos lm = new ListarMedicos();
         lm.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jmi_verMedicosActionPerformed
+
+    private void jmi_eliminarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarEspecialidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmi_eliminarEspecialidadActionPerformed
+
+    private void jmi_verUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verUsuariosActionPerformed
+        // TODO add your handling code here:
+        
+        ListarUsuarios lu = new ListarUsuarios();
+        lu.setVisible(true);
+    }//GEN-LAST:event_jmi_verUsuariosActionPerformed
+
+    private void jmi_verEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verEspecialidadesActionPerformed
+        // TODO add your handling code here:
+        
+        VerEspecialidades ve = new VerEspecialidades();
+        ve.setVisible(true);
+    }//GEN-LAST:event_jmi_verEspecialidadesActionPerformed
+
+    private void jmi_eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarUsuarioActionPerformed
+        // TODO add your handling code here:
+        
+        EliminarUsuario eu = new EliminarUsuario();
+        eu.setVisible(true);
+    }//GEN-LAST:event_jmi_eliminarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,5 +294,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jmi_eliminarEspecialidad;
+    private javax.swing.JMenuItem jmi_eliminarMedico;
+    private javax.swing.JMenuItem jmi_eliminarUsuario;
+    private javax.swing.JMenuItem jmi_verEspecialidades;
+    private javax.swing.JMenuItem jmi_verMedicos;
+    private javax.swing.JMenuItem jmi_verUsuarios;
     // End of variables declaration//GEN-END:variables
 }

@@ -161,6 +161,194 @@ public class Metodos {
         }
     }
     
+    public ArrayList<Usuario> mostrarUsuarios()
+    {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        
+        try {
+            
+            ConexionBaseDatos conbd = new ConexionBaseDatos();
+            Connection conex = conbd.conectar();
+            
+            String query = "SELECT * FROM usuario ORDER BY numrut_usuario";
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while   (rs.next())
+            {
+                Usuario usuario = new Usuario();
+                usuario.setDia(rs.getInt("DIA_NAC_USUARIO"));
+                usuario.setMes(rs.getInt("MES_NAC_USUARIO"));
+                usuario.setAno(rs.getInt("ANO_NAC_USUARIO"));
+                usuario.setNumRut(rs.getString("NUMRUT_USUARIO"));
+                usuario.setNombre(rs.getString("NOMBRE_USUARIO"));
+                usuario.setCorreo(rs.getString("CORREO_USUARIO"));
+                usuario.setNumTelefono(rs.getInt("TELEFONO_USUARIO"));
+                
+                
+                lista.add(usuario);
+            }
+            
+            rs.close();
+            stmt.close();
+            conex.close();
+            
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al mostrar Usuarios "+ e.getMessage());
+        }
+        return lista;
     
-
+        }
+    
+    public ArrayList<Especialidad> mostrarEspecialidad()
+    {
+        ArrayList<Especialidad> lista = new ArrayList<>();
+        
+        try {
+            
+            ConexionBaseDatos conbd = new ConexionBaseDatos();
+            Connection conex = conbd.conectar();
+            
+            String query = "SELECT * FROM especialidad ORDER BY id_especialidad";
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while   (rs.next())
+            {
+                Especialidad especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(rs.getInt("ID_ESPECIALIDAD"));
+                especialidad.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
+                
+                lista.add(especialidad);
+            }
+            
+            rs.close();
+            stmt.close();
+            conex.close();
+            
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al mostrar Especialidades "+ e.getMessage());
+        }
+        return lista;
+    
+        }
+    
+    public boolean eliminarUsuario(String rut)    
+    {
+        try {
+            
+            ConexionBaseDatos conbd = new ConexionBaseDatos();
+            Connection conex = conbd.conectar();
+            
+            String query = "DELETE FROM usuario WHERE numrut_usuario = ?";
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            stmt.setString(1, rut);
+            
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+            
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al eliminar Usuario" + e.getMessage());
+            return false;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error en el método eliminar Usuario" + e.getMessage());
+            return false;
+        }
+    }
+    
+        public boolean eliminarMedico(int rut)    
+    {
+        try {
+            
+            ConexionBaseDatos conbd = new ConexionBaseDatos();
+            Connection conex = conbd.conectar();
+            
+            String query = "DELETE FROM medico WHERE numrut_medico = ?";
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            stmt.setInt(1, rut);
+            
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+            
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al eliminar Medico" + e.getMessage());
+            return false;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error en el método eliminar Medico" + e.getMessage());
+            return false;
+        }
+    }
+        
+        public boolean eliminarEspecialidad(int idEsp)    
+    {
+        try {
+            
+            ConexionBaseDatos conbd = new ConexionBaseDatos();
+            Connection conex = conbd.conectar();
+            
+            String query = "DELETE FROM especialidad WHERE id_especialidad = ?";
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            stmt.setInt(1, idEsp);
+            
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+            
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al eliminar Especialidad" + e.getMessage());
+            return false;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error en el método eliminar Especialidad" + e.getMessage());
+            return false;
+        }
+    }
+        
+    public Usuario buscarUsuario(String rut)
+    {
+        Usuario usuario = new Usuario();
+        try {
+            
+            ConexionBaseDatos conbd = new ConexionBaseDatos();
+            Connection conex = conbd.conectar();
+            
+            String query = "SELECT FROM usuario WHERE numrut_usuario = ?";
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            stmt.setString(1, rut);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                usuario.setNumRut(rs.getString("NUMRUT_USUARIO"));
+                usuario.setNombre(rs.getString("NOMBRE_USUARIO"));
+                usuario.setCorreo(rs.getString("CORREO_USUARIO"));
+                usuario.setNumTelefono(rs.getInt("TELEFONO_USUARIO"));
+                
+            }
+            rs.close();
+            stmt.close();
+            conex.close();
+            
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al buscar Usuario");
+            
+        }
+        return usuario;
+    }
 }

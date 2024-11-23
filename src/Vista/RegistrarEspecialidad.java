@@ -19,6 +19,9 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
      */
     public RegistrarEspecialidad() {
         initComponents();
+        setSize(900,600);
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -40,7 +43,8 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
         jbtn_guardar = new javax.swing.JButton();
         jbtn_cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrando Especialidad");
         setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel1.setBackground(new java.awt.Color(167, 219, 216));
