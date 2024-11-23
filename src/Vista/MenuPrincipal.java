@@ -34,7 +34,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbtn_horaDisponible = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -66,20 +66,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("Reservar Cita");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 200, 100));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Anular Cita");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 200, 100));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("Horas Disponibles");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_horaDisponible.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_horaDisponible.setText("Horas Disponibles");
+        jbtn_horaDisponible.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtn_horaDisponibleActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 200, 100));
+        jPanel1.add(jbtn_horaDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 200, 100));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(116, 30));
 
@@ -212,11 +217,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         re.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jbtn_horaDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_horaDisponibleActionPerformed
         // TODO add your handling code here:
+       HoraDisponible hb = new HoraDisponible();
+       hb.setVisible(true);
         
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jbtn_horaDisponibleActionPerformed
 
     private void jmi_verMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_verMedicosActionPerformed
         // TODO add your handling code here:
@@ -258,6 +264,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         em.setVisible(true);
     }//GEN-LAST:event_jmi_eliminarMedicoActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        ReservarCita rs = new ReservarCita();
+        rs.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,7 +310,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -307,6 +320,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtn_horaDisponible;
     private javax.swing.JMenuItem jmi_eliminarEspecialidad;
     private javax.swing.JMenuItem jmi_eliminarMedico;
     private javax.swing.JMenuItem jmi_eliminarUsuario;
