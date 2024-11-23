@@ -13,7 +13,6 @@ public class ConexionBaseDatos {
     static String contrasena ="Dangerous2506";
     
     public static Connection conectar(){
-        
         Connection con = null;
         try {
             con = DriverManager.getConnection(url,usuario,contrasena);

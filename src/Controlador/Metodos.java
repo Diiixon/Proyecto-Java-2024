@@ -1,6 +1,7 @@
 
 package Controlador;
 
+
 import BaseDatos.ConexionBaseDatos;
 import Modelo.Usuario;
 import Modelo.Medico;
@@ -17,14 +18,14 @@ import java.sql.ResultSet;
  */
 public class Metodos {
     
+   
+    
     public boolean registrarUsuario(Usuario usuario)
     {
         try {
-            
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
-            
-            String query = "INSERT INTO usuario(DIA_NAC_USUARIO,MES_NAC_USUARIO,ANO_NAC_USUARIO,NUMRUT_USUARIO,NOMBRE_USUARIO,CORREO_USUARIO,TELEFONO_USUARIO) VALUES (?,?,?,?,?,?,?)";
+            Connection conex = ConexionBaseDatos.conectar();
+
+            String query = "INSERT INTO USUARIO (DIA_NAC_USUARIO,MES_NAC_USUARIO,ANO_NAC_USUARIO,NUMRUT_USUARIO,NOMBRE_USUARIO,CORREO_USUARIO,TELEFONO_USUARIO) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setInt(1, usuario.getDia());
@@ -44,6 +45,7 @@ public class Metodos {
             
         } catch (SQLException e) {
             System.out.println("Error en SQL al registrar Usuario "+ e.getMessage());
+            
             return false;
         }
         catch (Exception e)
@@ -58,10 +60,9 @@ public class Metodos {
         
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();;
             
-            String query = "INSERT INTO medico(ID_ESPECIALIDAD,NUMRUT_MEDICO,NOMBRE_MEDICO,CORREO_MEDICO,TELEFONO_MEDICO) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO MEDICO(ID_ESPECIALIDAD,NUMRUT_MEDICO,NOMBRE_MEDICO,CORREO_MEDICO,TELEFONO_MEDICO) VALUES (?,?,?,?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setInt(1, medico.getIdEspecialidad());
@@ -98,10 +99,9 @@ public class Metodos {
         
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "SELECT * FROM medico ORDER BY id_especialidad";
+            String query = "SELECT * FROM MEDICO ORDER BY id_especialidad";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             ResultSet rs = stmt.executeQuery();
@@ -134,10 +134,9 @@ public class Metodos {
     {
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "INSERT INTO especialidad (ID_ESPECIALIDAD,DESC_ESPECIALIDAD) VALUES (?,?)";
+            String query = "INSERT INTO ESPECIALIDAD (ID_ESPECIALIDAD,DESC_ESPECIALIDAD) VALUES (?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setInt(1, especialidad.getIdEspecialidad());
@@ -167,10 +166,9 @@ public class Metodos {
         
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "SELECT * FROM usuario ORDER BY numrut_usuario";
+            String query = "SELECT * FROM USUARIO ORDER BY numrut_usuario";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             ResultSet rs = stmt.executeQuery();
@@ -207,10 +205,9 @@ public class Metodos {
         
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "SELECT * FROM especialidad ORDER BY id_especialidad";
+            String query = "SELECT * FROM ESPECIALIDAD ORDER BY id_especialidad";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             ResultSet rs = stmt.executeQuery();
@@ -239,10 +236,9 @@ public class Metodos {
     {
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "DELETE FROM usuario WHERE numrut_usuario = ?";
+            String query = "DELETE FROM USUARIO WHERE numrut_usuario = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setString(1, rut);
@@ -267,10 +263,9 @@ public class Metodos {
     {
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "DELETE FROM medico WHERE numrut_medico = ?";
+            String query = "DELETE FROM MEDICO WHERE numrut_medico = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setInt(1, rut);
@@ -295,10 +290,9 @@ public class Metodos {
     {
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "DELETE FROM especialidad WHERE id_especialidad = ?";
+            String query = "DELETE FROM ESPECIALIDAD WHERE id_especialidad = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setInt(1, idEsp);
@@ -324,10 +318,9 @@ public class Metodos {
         Usuario usuario = new Usuario();
         try {
             
-            ConexionBaseDatos conbd = new ConexionBaseDatos();
-            Connection conex = conbd.conectar();
+            Connection conex = ConexionBaseDatos.conectar();
             
-            String query = "SELECT FROM usuario WHERE numrut_usuario = ?";
+            String query = "SELECT FROM USUARIO WHERE numrut_usuario = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
             
             stmt.setString(1, rut);
