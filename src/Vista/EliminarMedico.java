@@ -127,8 +127,8 @@ public class EliminarMedico extends javax.swing.JFrame {
     private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
         // TODO add your handling code here:
         
-        String rut, nombre, correo;
-        int telefono, idEspecialidad;
+        String rut, nombre, correo, descEspecialidad;
+        int telefono;
         
         Metodos metodos = new Metodos();
         DefaultTableModel modelo = (DefaultTableModel) this.jtbl_medicos.getModel();
@@ -142,9 +142,9 @@ public class EliminarMedico extends javax.swing.JFrame {
             nombre = medico.getNombre();
             correo = medico.getCorreo();
             telefono = medico.getNumTelefono();
-            idEspecialidad = medico.getIdEspecialidad();
+            descEspecialidad = medico.getDescEspecialidad();
             
-            modelo.addRow(new Object [] {rut,nombre,correo,telefono,idEspecialidad});
+            modelo.addRow(new Object [] {rut,nombre,correo,telefono,descEspecialidad});
         }
         
         if (lista.isEmpty()) {

@@ -121,7 +121,7 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
     private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
         // TODO add your handling code here:
         
-        int idEspecialidad = Integer.parseInt(this.jtxt_idEspecialidad.getText());
+        String idEspecialidad;
         String descEspecialidad;
         
         Metodos metodos = new Metodos();
@@ -129,7 +129,7 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         
         modelo.setRowCount(0);
         
-        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(idEspecialidad);
+        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(this.jtxt_idEspecialidad.getText());
         
         for (Especialidad especialidad : lista) {
             idEspecialidad = especialidad.getIdEspecialidad();

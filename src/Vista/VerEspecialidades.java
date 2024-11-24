@@ -93,7 +93,7 @@ public class VerEspecialidades extends javax.swing.JFrame {
     private void jbtn_mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_mostrarActionPerformed
         // TODO add your handling code here:
         
-        int id;
+        String id;
         String descripcion;
         
         Metodos metodos = new Metodos();

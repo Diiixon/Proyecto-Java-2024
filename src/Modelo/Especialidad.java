@@ -6,22 +6,22 @@ package Modelo;
  */
 public class Especialidad {
     
-    private int idEspecialidad;
+    private String idEspecialidad;
     private String descEspecialidad;
 
     public Especialidad() {
     }
 
-    public Especialidad(int idEspecialidad, String descEspecialidad) {
+    public Especialidad(String idEspecialidad, String descEspecialidad) {
         this.idEspecialidad = idEspecialidad;
         this.descEspecialidad = descEspecialidad;
     }
 
-    public int getIdEspecialidad() {
+    public String getIdEspecialidad() {
         return idEspecialidad;
     }
 
-    public void setIdEspecialidad(int idEspecialidad) {
+    public void setIdEspecialidad(String idEspecialidad) {
         this.idEspecialidad = idEspecialidad;
     }
 

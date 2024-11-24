@@ -118,22 +118,22 @@ public class AnularCita extends javax.swing.JFrame {
 
     private void jbtn_anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_anularActionPerformed
         // TODO add your handling code here:
-        String rutUsuario = jtxt_rutDelUsuario.getText();
-        int selectdRow = jtbl_citas.getSelectedRow();
-        if (selectdRow != -1) {
-            int idCita = (int) jtbl_citas.getValueAt(selectdRow, 0);
-            Metodos metodos = new Metodos();
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro desea anular la cita?", "Anular Cita", 0);
-            if (opcion == 0) {
-                metodos.anularCita(idCita);
-                JOptionPane.showMessageDialog(this, "Cita anulada exitosamente.");
-                cargarCitas(rutUsuario);
-            }else{
-                JOptionPane.showMessageDialog(this, "Acción de anulación cancelada.");
-            }
-        }else{
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para anular.");
-        }
+//        String rutUsuario = jtxt_rutDelUsuario.getText();
+//        int selectdRow = jtbl_citas.getSelectedRow();
+//        if (selectdRow != -1) {
+//            int idCita = (int) jtbl_citas.getValueAt(selectdRow, 0);
+//            Metodos metodos = new Metodos();
+//            int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro desea anular la cita?", "Anular Cita", 0);
+//            if (opcion == 0) {
+//                metodos.anularCita(idCita);
+//                JOptionPane.showMessageDialog(this, "Cita anulada exitosamente.");
+//                cargarCitas(rutUsuario);
+//            }else{
+//                JOptionPane.showMessageDialog(this, "Acción de anulación cancelada.");
+//            }
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Seleccione una cita para anular.");
+//        }
         
     }//GEN-LAST:event_jbtn_anularActionPerformed
 

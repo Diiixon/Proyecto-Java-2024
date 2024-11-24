@@ -20,7 +20,7 @@ public class ListarMedicos extends javax.swing.JFrame {
      */
     public ListarMedicos() {
         initComponents();
-        setSize(900,600);
+        setSize(900, 600);
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -122,26 +122,62 @@ public class ListarMedicos extends javax.swing.JFrame {
 
     private void jbtn_mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_mostrarActionPerformed
         // TODO add your handling code here:
-        
-        int id, telefono;
-        String rut, nombre, correo;
-        
+
+//        int telefono;
+//        String rut, nombre, correo, descEspecialidad;
+//        
+//        Metodos metodos = new Metodos();
+//        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_medicos.getModel();
+//        
+//        modelo.setRowCount(0);
+//        
+//        ArrayList<Medico> lista = metodos.mostrarMedicos();
+//        for (Medico medico : lista) {
+//            descEspecialidad = medico.getDescEspecialidad();
+//            rut = medico.getNumRut();
+//            nombre = medico.getNombre();
+//            correo = medico.getCorreo();
+//            telefono = medico.getNumTelefono();
+//            
+//            modelo.addRow(new Object [] {descEspecialidad, rut, nombre, correo, telefono});
+//            
+//            
+//
+//        }modelo.fireTableDataChanged();  // Actualiza el modelo de datos
+//            this.jtbl_medicos.revalidate(); // Vuelve a validar la tabla
+//            this.jtbl_medicos.repaint();    // Redibuja la tabla
+        int telefono;
+        String rut, nombre, correo, descEspecialidad;
+
         Metodos metodos = new Metodos();
         DefaultTableModel modelo = (DefaultTableModel) this.jtbl_medicos.getModel();
-        
-        modelo.setRowCount(0);
-        
+
+        modelo.setRowCount(0);  // Limpiar la tabla antes de agregar nuevas filas
+
         ArrayList<Medico> lista = metodos.mostrarMedicos();
+
+        // Depuración: Verifica la cantidad de elementos en la lista
+        System.out.println("Cantidad de médicos: " + lista.size());
+
+        if (lista.isEmpty()) {
+            System.out.println("No se encontraron médicos.");
+        }
+
         for (Medico medico : lista) {
-            id = medico.getIdEspecialidad();
+            descEspecialidad = medico.getDescEspecialidad();
             rut = medico.getNumRut();
             nombre = medico.getNombre();
             correo = medico.getCorreo();
             telefono = medico.getNumTelefono();
-            
-            modelo.addRow(new Object [] {id, rut, nombre, correo, telefono});
+
+            modelo.addRow(new Object[]{descEspecialidad, rut, nombre, correo, telefono});
         }
-        
+
+        // Forzar la actualización de la tabla
+        modelo.fireTableDataChanged();
+        this.jtbl_medicos.revalidate();
+        this.jtbl_medicos.repaint();
+
     }//GEN-LAST:event_jbtn_mostrarActionPerformed
 
     /**

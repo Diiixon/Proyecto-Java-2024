@@ -6,27 +6,27 @@ package Modelo;
  */
 public class Medico extends Persona{
     
-    private int idEspecialidad;
+    private String descEspecialidad;
 
     public Medico() {
     }
 
-    public Medico(int idEspecialidad, String numRut, String nombre, String correo, int numTelefono) {
+    public Medico(String descEspecialidad, String numRut, String nombre, String correo, int numTelefono) {
         super(numRut, nombre, correo, numTelefono);
-        this.idEspecialidad = idEspecialidad;
+        this.descEspecialidad = descEspecialidad;
     }
 
-    public int getIdEspecialidad() {
-        return idEspecialidad;
+    public String getDescEspecialidad() {
+        return descEspecialidad;
     }
 
-    public void setIdEspecialidad(int idEspecialidad) {
-        this.idEspecialidad = idEspecialidad;
+    public void setDescEspecialidad(String descEspecialidad) {
+        this.descEspecialidad = descEspecialidad;
     }
 
     @Override
     public String toString() {
-        return "Medico" + "idEspecialidad = " + idEspecialidad;
+        return "Medico" + "idEspecialidad = " + descEspecialidad;
     }
     
     
