@@ -146,6 +146,10 @@ public class EliminarMedico extends javax.swing.JFrame {
             
             modelo.addRow(new Object [] {rut,nombre,correo,telefono,idEspecialidad});
         }
+        
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Médico no exise en los registros","No Encontrado",0);
+        }
 
     }//GEN-LAST:event_jbtn_buscarActionPerformed
 

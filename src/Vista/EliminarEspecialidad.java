@@ -9,7 +9,7 @@ import Controlador.Metodos;
 import Modelo.Especialidad;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel; 
 
 /**
  *
@@ -39,11 +39,11 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtxt_idEspecialidad = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtbl_especialidad = new javax.swing.JTable();
+        jbtn_buscar = new javax.swing.JButton();
         jbtn_eliminar = new javax.swing.JButton();
         jbtn_cancelar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtbl_tablaEspecialidad = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Eliminando Especialidad");
@@ -72,34 +72,14 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         });
         jPanel2.add(jtxt_idEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 310, 30));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_buscar.setText("Buscar");
+        jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbtn_buscarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
-
-        jtbl_especialidad.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Especialidad", "Descripción"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jtbl_especialidad);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, 90));
+        jPanel2.add(jbtn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 140, -1, -1));
 
         jbtn_eliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_eliminar.setText("Eliminar");
@@ -119,32 +99,80 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         });
         jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
+        jtbl_tablaEspecialidad.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Especialidad", "Descripción"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jtbl_tablaEspecialidad);
+
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 230, 600, 90));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
         // TODO add your handling code here:
         
-        String id;
+        int idEspecialidad = Integer.parseInt(this.jtxt_idEspecialidad.getText());
         String descEspecialidad;
         
         Metodos metodos = new Metodos();
-        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_especialidad.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_tablaEspecialidad.getModel();
         
         modelo.setRowCount(0);
         
-        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(this.jtxt_idEspecialidad.getText());
+        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(idEspecialidad);
         
         for (Especialidad especialidad : lista) {
-            id = String.valueOf(especialidad.getIdEspecialidad());
+            idEspecialidad = especialidad.getIdEspecialidad();
             descEspecialidad = especialidad.getDescEspecialidad();
             
-            modelo.addRow(new Object [] {id,descEspecialidad});
+            modelo.addRow(new Object [] {idEspecialidad,descEspecialidad});
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Especialidad no exise en los registros","No Encontrado",0);
+        }
+        
+        
+        
+        
+//        String id;
+//        String descEspecialidad;
+//        
+//        Metodos metodos = new Metodos();
+//        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_especialidad.getModel();
+//        
+//        modelo.setRowCount(0);
+//        
+//        ArrayList<Especialidad> lista = metodos.buscarEspecialidad(this.jtxt_idEspecialidad.getText());
+//        
+//        for (Especialidad especialidad : lista) {
+//            id = String.valueOf(especialidad.getIdEspecialidad());
+//            descEspecialidad = especialidad.getDescEspecialidad();
+//            
+//            modelo.addRow(new Object [] {id,descEspecialidad});
+//        }
+//        
+//        if (lista.isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Usuario no exise en los registros","No Encontrado",0);
+//        }
+        
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
 
     private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
         // TODO add your handling code here:
@@ -214,15 +242,15 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbtn_buscar;
     private javax.swing.JButton jbtn_cancelar;
     private javax.swing.JButton jbtn_eliminar;
-    private javax.swing.JTable jtbl_especialidad;
+    private javax.swing.JTable jtbl_tablaEspecialidad;
     private javax.swing.JTextField jtxt_idEspecialidad;
     // End of variables declaration//GEN-END:variables
 

@@ -136,7 +136,7 @@ public class HoraDisponible extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtn_BuscarActionPerformed
 
     private void jcbx_EspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbx_EspecialidadActionPerformed
- 
+
     }//GEN-LAST:event_jcbx_EspecialidadActionPerformed
 
     /**
