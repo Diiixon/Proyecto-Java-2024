@@ -33,8 +33,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jbtn_horaDisponible = new javax.swing.JButton();
+        jbtn_anularCita = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -73,9 +73,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 200, 100));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Anular Cita");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 200, 100));
+        jbtn_anularCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_anularCita.setText("Anular Cita");
+        jbtn_anularCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_anularCitaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtn_anularCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 200, 100));
 
         jbtn_horaDisponible.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_horaDisponible.setText("Horas Disponibles");
@@ -264,13 +269,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         em.setVisible(true);
     }//GEN-LAST:event_jmi_eliminarMedicoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbtn_anularCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_anularCitaActionPerformed
         // TODO add your handling code here:
+        AnularCita ac = new AnularCita();
+        ac.setVisible(true);
         
-        ReservarCita rs = new ReservarCita();
-        rs.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbtn_anularCitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,7 +313,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -320,7 +324,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jbtn_horaDisponible;
+    private javax.swing.JButton jbtn_anularCita;
     private javax.swing.JMenuItem jmi_eliminarEspecialidad;
     private javax.swing.JMenuItem jmi_eliminarMedico;
     private javax.swing.JMenuItem jmi_eliminarUsuario;

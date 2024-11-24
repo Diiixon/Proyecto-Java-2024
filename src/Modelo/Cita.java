@@ -1,7 +1,8 @@
 package Modelo;
 
-import java.time.LocalTime;
-import java.util.Date;
+
+import java.sql.Time;
+import java.sql.Date;
 
 /**
  *
@@ -13,13 +14,13 @@ public class Cita {
     private String numRutUsuario;
     private String numRutMedico;
     private Date fechaCita;
-    private LocalTime horaCita;
+    private Time horaCita;
     private String motivo; //motivo de la consulta
 
     public Cita() {
     }
 
-    public Cita(int idCita, String numRutUsuario, String numRutMedico, Date fechaCita, LocalTime horaCita, String motivo) {
+    public Cita(int idCita, String numRutUsuario, String numRutMedico, Date fechaCita, Time horaCita, String motivo) {
         this.idCita = idCita;
         this.numRutUsuario = numRutUsuario;
         this.numRutMedico = numRutMedico;
@@ -60,11 +61,11 @@ public class Cita {
         this.fechaCita = fechaCita;
     }
 
-    public LocalTime getHoraCita() {
+    public Time getHoraCita() {
         return horaCita;
     }
 
-    public void setHoraCita(LocalTime horaCita) {
+    public void setHoraCita(Time horaCita) {
         this.horaCita = horaCita;
     }
 

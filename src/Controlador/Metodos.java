@@ -1,6 +1,7 @@
 package Controlador;
 
 import BaseDatos.ConexionBaseDatos;
+import Modelo.Cita;
 import Modelo.Usuario;
 import Modelo.Medico;
 import Modelo.Especialidad;
@@ -380,5 +381,13 @@ public class Metodos {
 
         }
         return lista;
+    }
+
+    public void anularCita(int idCita) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public ArrayList<Cita> obtenerCitasPorRut(String rutUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
