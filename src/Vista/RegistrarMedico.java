@@ -158,10 +158,11 @@ public class RegistrarMedico extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        String rut, nombre, correo;
-        int telefono,especialidad;
+        String rut, nombre, correo, especialidad;
+        int telefono;
         
         especialidad = me.ObtenerID(jComboBox1.getSelectedItem().toString());
+
         rut = this.jtxt_rut.getText();
         nombre = this.jtxt_nombre.getText();
         correo = this.jtxt_correo.getText();

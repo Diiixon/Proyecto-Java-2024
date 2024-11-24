@@ -125,10 +125,10 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
     private void jbtn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_guardarActionPerformed
         // TODO add your handling code here:
         
-        int id;
+        String id;
         String descripcion;
         
-        id = Integer.parseInt(this.jtxt_idEspecialidad.getText());
+        id = this.jtxt_idEspecialidad.getText();
         descripcion = this.jtxt_descripcion.getText();
         
         Especialidad especialidad = new Especialidad(id, descripcion);

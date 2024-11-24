@@ -1,6 +1,7 @@
 package Controlador;
 
 import BaseDatos.ConexionBaseDatos;
+//import Modelo.Cita;
 import Modelo.Usuario;
 import Modelo.Medico;
 import Modelo.Especialidad;
@@ -57,10 +58,10 @@ public class Metodos {
 
             Connection conex = ConexionBaseDatos.conectar();;
 
-            String query = "INSERT INTO MEDICO(ID_ESPECIALIDAD,NUMRUT_MEDICO,NOMBRE_MEDICO,CORREO_MEDICO,TELEFONO_MEDICO) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO MEDICO(DESC_ESPECIALIDAD,NUMRUT_MEDICO,NOMBRE_MEDICO,CORREO_MEDICO,TELEFONO_MEDICO) VALUES (?,?,?,?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
 
-            stmt.setInt(1, medico.getIdEspecialidad());
+            stmt.setString(1, medico.getDescEspecialidad());
             stmt.setString(2, medico.getNumRut());
             stmt.setString(3, medico.getNombre());
             stmt.setString(4, medico.getCorreo());
@@ -89,14 +90,30 @@ public class Metodos {
 
             Connection conex = ConexionBaseDatos.conectar();
 
-            String query = "SELECT * FROM MEDICO ORDER BY id_especialidad";
+            String query = """
+                           SELECT 
+                               m.NUMRUT_MEDICO AS RutMedico,
+                               m.NOMBRE_MEDICO AS NombreMedico,
+                               m.CORREO_MEDICO AS CorreoMedico,
+                               m.TELEFONO_MEDICO AS TelefonoMedico,
+                               e.DESC_ESPECIALIDAD AS Especialidad
+                           FROM 
+                               MEDICO m
+                           INNER JOIN 
+                               ESPECIALIDAD e 
+                           ON 
+                               m.DESC_ESPECIALIDAD = e.ID_ESPECIALIDAD
+                           ORDER BY 
+                               e.DESC_ESPECIALIDAD;
+                           """;
+//            String query = "SELECT * FROM MEDICO ORDER BY id_especialidad";
             PreparedStatement stmt = conex.prepareStatement(query);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Medico medico = new Medico();
-                medico.setIdEspecialidad(rs.getInt("ID_ESPECIALIDAD"));
+                medico.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
                 medico.setNumRut(rs.getString("NUMRUT_MEDICO"));
                 medico.setNombre(rs.getString("NOMBRE_MEDICO"));
                 medico.setCorreo(rs.getString("CORREO_MEDICO"));
@@ -124,7 +141,7 @@ public class Metodos {
             String query = "INSERT INTO ESPECIALIDAD (ID_ESPECIALIDAD,DESC_ESPECIALIDAD) VALUES (?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
 
-            stmt.setInt(1, especialidad.getIdEspecialidad());
+            stmt.setString(1, especialidad.getIdEspecialidad());
             stmt.setString(2, especialidad.getDescEspecialidad());
 
             stmt.executeUpdate();
@@ -192,7 +209,7 @@ public class Metodos {
 
             while (rs.next()) {
                 Especialidad especialidad = new Especialidad();
-                especialidad.setIdEspecialidad(rs.getInt("ID_ESPECIALIDAD"));
+                especialidad.setIdEspecialidad(rs.getString("ID_ESPECIALIDAD"));
                 especialidad.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
 
                 lista.add(especialidad);
@@ -337,7 +354,7 @@ public class Metodos {
                 medico.setNombre(rs.getString("NOMBRE_MEDICO"));
                 medico.setCorreo(rs.getString("CORREO_MEDICO"));
                 medico.setNumTelefono(rs.getInt("TELEFONO_MEDICO"));
-                medico.setIdEspecialidad(rs.getInt("ID_ESPECIALIDAD"));
+                medico.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
 
                 lista.add(medico);
 
@@ -353,7 +370,7 @@ public class Metodos {
         return lista;
     }
 
-    public ArrayList<Especialidad> buscarEspecialidad(int id) {
+    public ArrayList<Especialidad> buscarEspecialidad(String id) {
         ArrayList<Especialidad> lista = new ArrayList<>();
         try {
 
@@ -362,14 +379,14 @@ public class Metodos {
             String query = "SELECT * FROM ESPECIALIDAD WHERE ID_ESPECIALIDAD = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
 
-            stmt.setInt(1, id);
+            stmt.setString(1, id);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 Especialidad especialidad = new Especialidad();
 
-                especialidad.setIdEspecialidad(rs.getInt("ID_ESPECIALIDAD"));
+                especialidad.setIdEspecialidad(rs.getString("ID_ESPECIALIDAD"));
                 especialidad.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
 
                 lista.add(especialidad);
@@ -385,7 +402,7 @@ public class Metodos {
         }
         return lista;
     }
-    
+
     public void RellenarCombo(String tabla, String valor, JComboBox combo){
         
         String sql = "select * from " + tabla;
