@@ -6,11 +6,15 @@ import BaseDatos.ConexionBaseDatos;
 import Modelo.Usuario;
 import Modelo.Medico;
 import Modelo.Especialidad;
+import Modelo.Horario;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -420,4 +424,63 @@ public class Metodos {
         }
         return lista;
     }
+    
+    public void RellenarCombo(String tabla, String valor, JComboBox combo){
+        
+        String sql = "select * from " + tabla;
+        Statement st;
+        Connection conex = ConexionBaseDatos.conectar();
+        
+        try {
+            st = conex.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                combo.addItem(rs.getString(valor));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error" + e.toString());
+        }
+        
+    
+         
+        
+        
+    }
+    
+    public int ObtenerID(String desc){
+        
+        int idEspecialidad = 0;
+        
+        try {
+            
+            Connection conex = ConexionBaseDatos.conectar();
+            String sql = "select ID_ESPECIALIDAD from ESPECIALIDAD where DESC_ESPECIALIDAD = ? ";
+            PreparedStatement stmt = conex.prepareStatement(sql);
+            stmt.setString(1, desc);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                idEspecialidad = rs.getInt("ID_ESPECIALIDAD");
+            }
+             rs.close();
+             stmt.close();
+             conex.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return idEspecialidad; 
+    }
 }
+    
+//    public ArrayList<Horario> Horarios(String especialidad){
+//        
+//        ArrayList<Horario> lista = new ArrayList<>();
+//        try {
+//            
+//            Connection conex = ConexionBaseDatos.conectar();
+//            String sql = "SELECT * FROM HORARIO WHERE "
+//        
+//        
+//        
+//    }
+//}

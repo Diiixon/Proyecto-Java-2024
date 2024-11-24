@@ -5,6 +5,10 @@
 package Vista;
 
 import Controlador.Metodos;
+import Modelo.Especialidad;
+import Modelo.Horario;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,11 +19,13 @@ public class HoraDisponible extends javax.swing.JFrame {
     /**
      * Creates new form HoraDisponible
      */
+    Metodos me = new Metodos();
     public HoraDisponible() {
         initComponents();
         setSize(900,600);
         setResizable(false);
         setLocationRelativeTo(null);
+        me.RellenarCombo("ESPECIALIDAD", "DESC_ESPECIALIDAD", jcbx_Especialidad);
     }
 
     /**
@@ -94,7 +100,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         });
         jPanel4.add(jbtn_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, -1, -1));
 
-        jcbx_Especialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "a" }));
+        jcbx_Especialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--" }));
         jcbx_Especialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbx_EspecialidadActionPerformed(evt);
@@ -109,15 +115,28 @@ public class HoraDisponible extends javax.swing.JFrame {
 
     private void jbtn_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_BuscarActionPerformed
         // TODO add your handling code here:
+        
+//        int dia,mes,año;
+//        String rut,hora;
+//        boolean disponible;
+//        
+//        DefaultTableModel modelo = (DefaultTableModel) this.jtb_Disponible.getModel();
+//        
+//        modelo.setRowCount(0);
+//        
+//        ArrayList<Horario>lista = me.
+        
+        
+        
+        
+        
+        
+         
+        
     }//GEN-LAST:event_jbtn_BuscarActionPerformed
 
     private void jcbx_EspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbx_EspecialidadActionPerformed
-        int id;
-        String especialidad;
-        
-        Metodos metodos = new Metodos();
-        
-        metodos.mostrarEspecialidad()
+ 
     }//GEN-LAST:event_jcbx_EspecialidadActionPerformed
 
     /**

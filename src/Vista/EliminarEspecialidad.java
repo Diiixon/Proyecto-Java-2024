@@ -64,6 +64,12 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("ID Especialidad:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
+
+        jtxt_idEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_idEspecialidadActionPerformed(evt);
+            }
+        });
         jPanel2.add(jtxt_idEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 310, 30));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -167,6 +173,10 @@ public class EliminarEspecialidad extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jbtn_eliminarActionPerformed
+
+    private void jtxt_idEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_idEspecialidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_idEspecialidadActionPerformed
 
     /**
      * @param args the command line arguments
