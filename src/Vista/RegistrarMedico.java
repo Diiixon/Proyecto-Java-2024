@@ -16,11 +16,15 @@ public class RegistrarMedico extends javax.swing.JFrame {
     /**
      * Creates new form RegistrarMedico
      */
+    Metodos me = new Metodos();
     public RegistrarMedico() {
         initComponents();
         setSize(900,600);
         setResizable(false);
         setLocationRelativeTo(null);
+        me.RellenarCombo("ESPECIALIDAD", "DESC_ESPECIALIDAD", jComboBox1);
+        
+        
     }
 
     /**
@@ -43,10 +47,10 @@ public class RegistrarMedico extends javax.swing.JFrame {
         jtxt_rut = new javax.swing.JTextField();
         jtxt_nombre = new javax.swing.JTextField();
         jtxt_correo = new javax.swing.JTextField();
-        jtxt_especialidad = new javax.swing.JTextField();
         jtxt_telefono = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -103,7 +107,6 @@ public class RegistrarMedico extends javax.swing.JFrame {
         jPanel1.add(jtxt_rut, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 310, 30));
         jPanel1.add(jtxt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 310, 30));
         jPanel1.add(jtxt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 310, 30));
-        jPanel1.add(jtxt_especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 310, 30));
         jPanel1.add(jtxt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 310, 30));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -124,15 +127,24 @@ public class RegistrarMedico extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione--", " " }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 352, 310, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -149,7 +161,8 @@ public class RegistrarMedico extends javax.swing.JFrame {
         String rut, nombre, correo, especialidad;
         int telefono;
         
-        especialidad = this.jtxt_especialidad.getText();
+        especialidad = me.ObtenerID(jComboBox1.getSelectedItem().toString());
+
         rut = this.jtxt_rut.getText();
         nombre = this.jtxt_nombre.getText();
         correo = this.jtxt_correo.getText();
@@ -198,6 +211,7 @@ public class RegistrarMedico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -207,7 +221,6 @@ public class RegistrarMedico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jtxt_correo;
-    private javax.swing.JTextField jtxt_especialidad;
     private javax.swing.JTextField jtxt_nombre;
     private javax.swing.JTextField jtxt_rut;
     private javax.swing.JTextField jtxt_telefono;

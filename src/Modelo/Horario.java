@@ -12,12 +12,25 @@ public class Horario {
     private String numRut;
     private Date fecha;
     private boolean estado; // false = disponible - true = reservado
-    private LocalTime hora;
+    private String hora;
+    private String especialidad;
+
+    public Horario(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
 
     public Horario() {
     }
 
-    public Horario(String numRut, Date fecha, boolean estado, LocalTime hora) {
+    public Horario(String numRut, Date fecha, boolean estado, String hora) {
         this.numRut = numRut;
         this.fecha = fecha;
         this.estado = estado;
@@ -48,22 +61,18 @@ public class Horario {
         this.estado = estado;
     }
 
-    public LocalTime getHora() {
+    public String getHora() {
         return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
     }
 
     @Override
     public String toString() {
-        return "Horario" + 
-                "numRut = " + numRut + 
-                ", fecha = " + fecha + 
-                ", estado = " + estado + 
-                ", hora = " + hora;
+        return "Horario{" + "numRut=" + numRut + ", fecha=" + fecha + ", estado=" + estado + ", hora=" + hora + ", especialidad=" + especialidad + '}';
     }
+
+   
+
+    
 
     
     
