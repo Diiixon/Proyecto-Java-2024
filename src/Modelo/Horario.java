@@ -10,31 +10,23 @@ import java.util.Date;
 public class Horario {
     
     private String numRut;
-    private Date fecha;
-    private boolean estado; // false = disponible - true = reservado
+    private int dia,mes,ano;
+    private String estado; 
     private String hora;
-    private String especialidad;
-
-    public Horario(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
+    
+    private Medico medico;
 
     public Horario() {
     }
 
-    public Horario(String numRut, Date fecha, boolean estado, String hora) {
+    public Horario(String numRut, int dia, int mes, int ano, String estado, String hora, Medico medico) {
         this.numRut = numRut;
-        this.fecha = fecha;
+        this.dia = dia;
+        this.mes = mes;
+        this.ano = ano;
         this.estado = estado;
         this.hora = hora;
+        this.medico = medico;
     }
 
     public String getNumRut() {
@@ -45,19 +37,35 @@ public class Horario {
         this.numRut = numRut;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public int getDia() {
+        return dia;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setDia(int dia) {
+        this.dia = dia;
     }
 
-    public boolean isEstado() {
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -65,10 +73,28 @@ public class Horario {
         return hora;
     }
 
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+
     @Override
     public String toString() {
-        return "Horario{" + "numRut=" + numRut + ", fecha=" + fecha + ", estado=" + estado + ", hora=" + hora + ", especialidad=" + especialidad + '}';
+        return "Horario{" + "numRut=" + numRut + ", dia=" + dia + ", mes=" + mes + ", ano=" + ano + ", estado=" + estado + ", hora=" + hora + ", medico=" + medico + '}';
     }
+
+    
+
+    
+    
+    
 
    
 

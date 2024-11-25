@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Dixon Tapia Aguilera
@@ -7,13 +9,16 @@ package Modelo;
 public class Medico extends Persona{
     
     private String descEspecialidad;
+    
+    
 
     public Medico() {
     }
 
-    public Medico(String descEspecialidad, String numRut, String nombre, String correo, int numTelefono) {
+    public Medico(String descEspecialidad,  String numRut, String nombre, String correo, int numTelefono) {
         super(numRut, nombre, correo, numTelefono);
         this.descEspecialidad = descEspecialidad;
+        
     }
 
     public String getDescEspecialidad() {
@@ -24,10 +29,9 @@ public class Medico extends Persona{
         this.descEspecialidad = descEspecialidad;
     }
 
-    @Override
-    public String toString() {
-        return "Medico" + "idEspecialidad = " + descEspecialidad;
-    }
+ 
+
+    
     
     
 
