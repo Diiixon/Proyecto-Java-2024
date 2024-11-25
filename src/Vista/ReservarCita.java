@@ -85,7 +85,12 @@ public class ReservarCita extends javax.swing.JFrame {
         jLabel2.setText("Médico");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
-        jcbx_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Horas --", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00" }));
+        jcbx_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Horas --", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30" }));
+        jcbx_hora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbx_horaActionPerformed(evt);
+            }
+        });
         jcbx_hora.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jcbx_horaPropertyChange(evt);
@@ -178,6 +183,11 @@ public class ReservarCita extends javax.swing.JFrame {
 
         jbtn_cancelar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jbtn_cancelar.setText("Cancelar");
+        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_cancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 120, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
@@ -233,31 +243,46 @@ public class ReservarCita extends javax.swing.JFrame {
     }//GEN-LAST:event_jCalendar1PropertyChange
 
     private void jtxt_horaSeleccionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_horaSeleccionadaActionPerformed
-        // TODO add your handling code here:
+        String hora;
+        hora = (String) jcbx_hora.getSelectedItem();
+        jtxt_horaSeleccionada.setText(hora);
+        System.out.println(hora);
         
-//        String hora = String.valueOf(this.jcbx_hora.getSelectedIndex());
-//        this.jtxt_horaSeleccionada.setText(hora);
+       
+        
     }//GEN-LAST:event_jtxt_horaSeleccionadaActionPerformed
 
     private void jcbx_horaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbx_horaPropertyChange
         // TODO add your handling code here:
-//        this.jcbx_hora.addActionListener(new ActionListener(){
-//            public void horaSeleccionada(ActionEvent e){
-//                String horaSeleccionada = (String) jcbx_hora.getSelectedItem();
-//                jtxt_horaSeleccionada.setText(horaSeleccionada);
-//            }
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//            }
-//        });
         
     }//GEN-LAST:event_jcbx_horaPropertyChange
 
     private void jtxt_fechaSeleccionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_fechaSeleccionadaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxt_fechaSeleccionadaActionPerformed
+
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
+
+    private void jcbx_horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbx_horaActionPerformed
+        // TODO add your handling code here:
+          
+        
+        jcbx_hora.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        // Obtener el valor seleccionado
+        String horaSeleccionada = (String) jcbx_hora.getSelectedItem();
+
+        // Verifica que no sea nulo y actualiza el JTextField
+        if (horaSeleccionada != null) {
+            jtxt_horaSeleccionada.setText(horaSeleccionada);
+        }
+    }
+});
+       // jcbx_hora.setSelectedIndex(1);
+    }//GEN-LAST:event_jcbx_horaActionPerformed
 
     /**
      * @param args the command line arguments
