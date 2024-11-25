@@ -298,8 +298,9 @@ public class Metodos {
         }
     }
 
-    public ArrayList<Usuario> buscarUsuario(String rut) {
-        ArrayList<Usuario> lista = new ArrayList<>();
+    public Usuario buscarUsuario(String rut) {
+        
+        Usuario usuario = null;
         try {
 
             Connection conex = ConexionBaseDatos.conectar();
@@ -312,7 +313,7 @@ public class Metodos {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                Usuario usuario = new Usuario();
+                usuario = new Usuario();
                 usuario.setDia(rs.getInt("DIA_NAC_USUARIO"));
                 usuario.setMes(rs.getInt("MES_NAC_USUARIO"));
                 usuario.setAno(rs.getInt("ANO_NAC_USUARIO"));
@@ -320,8 +321,6 @@ public class Metodos {
                 usuario.setNombre(rs.getString("NOMBRE_USUARIO"));
                 usuario.setCorreo(rs.getString("CORREO_USUARIO"));
                 usuario.setNumTelefono(rs.getInt("TELEFONO_USUARIO"));
-
-                lista.add(usuario);
 
             }
             rs.close();
@@ -332,7 +331,7 @@ public class Metodos {
             System.out.println("Error en SQL al buscar Usuario");
 
         }
-        return lista;
+        return usuario;
     }
 
     public ArrayList<Medico> buscarMedico(String rut) {
@@ -477,6 +476,37 @@ public class Metodos {
             e.printStackTrace();
         }  
         return Horarios;
+    }
+    
+    public boolean actualizarUsuario(Usuario usuario) {
+        try {
+            Connection conex = ConexionBaseDatos.conectar();
+
+            String query = "UPDATE USUARIO set DIA_NAC_USUARIO = ?, MES_NAC_USUARIO = ?,ANO_NAC_USUARIO = ?,NOMBRE_USUARIO = ?,CORREO_USUARIO = ?,TELEFONO_USUARIO = ? where NUMRUT_USUARIO = ?";
+            PreparedStatement stmt = conex.prepareStatement(query);
+
+            stmt.setInt(1, usuario.getDia());
+            stmt.setInt(2, usuario.getMes());
+            stmt.setInt(3, usuario.getAno());
+            stmt.setString(4, usuario.getNombre());
+            stmt.setString(5, usuario.getCorreo());
+            stmt.setInt(6, usuario.getNumTelefono());
+            stmt.setString(7, usuario.getNumRut());
+
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al actualizar Usuario " + e.getMessage());
+
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error en el método actualizar Usuario " + e.getMessage());
+            return false;
+        }
     }
     
 }

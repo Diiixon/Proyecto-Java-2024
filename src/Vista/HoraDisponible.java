@@ -72,10 +72,7 @@ public class HoraDisponible extends javax.swing.JFrame {
 
         jtb_Disponible.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Hora", "Rut Doctor", "Estado"
