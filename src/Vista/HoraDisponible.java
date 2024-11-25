@@ -25,6 +25,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         setSize(900,600);
         setResizable(false);
         setLocationRelativeTo(null);
+        me.RellenarCombo("MEDICO", "NOMBRE_MEDICO", this.jcbx_medico);
         
     }
 
@@ -45,6 +46,8 @@ public class HoraDisponible extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtb_Disponible = new javax.swing.JTable();
         jbtn_Mostrar = new javax.swing.JButton();
+        jcbx_medico = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,7 +92,14 @@ public class HoraDisponible extends javax.swing.JFrame {
                 jbtn_MostrarActionPerformed(evt);
             }
         });
-        jPanel4.add(jbtn_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
+        jPanel4.add(jbtn_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, -1, -1));
+
+        jcbx_medico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
+        jPanel4.add(jcbx_medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 310, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Médico");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
@@ -115,23 +125,13 @@ public class HoraDisponible extends javax.swing.JFrame {
             ano = horario.getAno();
             
             if (estado == "1") {
-                estado = "Dispobible"; 
+                estado = "Disponible"; 
             }else{
                 estado = "Reservado";
             }
             
             modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,estado});
         }
-        
-       
-        
-        
-
-        
-        
-        
-        
-         
         
     }//GEN-LAST:event_jbtn_MostrarActionPerformed
 
@@ -173,11 +173,13 @@ public class HoraDisponible extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtn_Mostrar;
+    private javax.swing.JComboBox<String> jcbx_medico;
     private javax.swing.JTable jtb_Disponible;
     // End of variables declaration//GEN-END:variables
 }

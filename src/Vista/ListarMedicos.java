@@ -44,7 +44,6 @@ public class ListarMedicos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mostrando Médicos");
         setMinimumSize(new java.awt.Dimension(900, 600));
-        setPreferredSize(new java.awt.Dimension(900, 600));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(167, 219, 216));
@@ -79,7 +78,7 @@ public class ListarMedicos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Especialidad", "RUT", "Nombre", "Correo", "Medicos"
+                "RUT", "Nombre", "Especialidad", "Correo", "Teléfono"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -91,9 +90,6 @@ public class ListarMedicos extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtbl_medicos);
-        if (jtbl_medicos.getColumnModel().getColumnCount() > 0) {
-            jtbl_medicos.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 740, 340));
 
@@ -123,60 +119,25 @@ public class ListarMedicos extends javax.swing.JFrame {
     private void jbtn_mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_mostrarActionPerformed
         // TODO add your handling code here:
 
-//        int telefono;
-//        String rut, nombre, correo, descEspecialidad;
-//        
-//        Metodos metodos = new Metodos();
-//        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_medicos.getModel();
-//        
-//        modelo.setRowCount(0);
-//        
-//        ArrayList<Medico> lista = metodos.mostrarMedicos();
-//        for (Medico medico : lista) {
-//            descEspecialidad = medico.getDescEspecialidad();
-//            rut = medico.getNumRut();
-//            nombre = medico.getNombre();
-//            correo = medico.getCorreo();
-//            telefono = medico.getNumTelefono();
-//            
-//            modelo.addRow(new Object [] {descEspecialidad, rut, nombre, correo, telefono});
-//            
-//            
-//
-//        }modelo.fireTableDataChanged();  // Actualiza el modelo de datos
-//            this.jtbl_medicos.revalidate(); // Vuelve a validar la tabla
-//            this.jtbl_medicos.repaint();    // Redibuja la tabla
         int telefono;
         String rut, nombre, correo, descEspecialidad;
-
+        
         Metodos metodos = new Metodos();
         DefaultTableModel modelo = (DefaultTableModel) this.jtbl_medicos.getModel();
-
-        modelo.setRowCount(0);  // Limpiar la tabla antes de agregar nuevas filas
-
+        
+        modelo.setRowCount(0);
+        
         ArrayList<Medico> lista = metodos.mostrarMedicos();
-
-        // Depuración: Verifica la cantidad de elementos en la lista
-        System.out.println("Cantidad de médicos: " + lista.size());
-
-        if (lista.isEmpty()) {
-            System.out.println("No se encontraron médicos.");
-        }
-
         for (Medico medico : lista) {
             descEspecialidad = medico.getDescEspecialidad();
             rut = medico.getNumRut();
             nombre = medico.getNombre();
             correo = medico.getCorreo();
             telefono = medico.getNumTelefono();
-
-            modelo.addRow(new Object[]{descEspecialidad, rut, nombre, correo, telefono});
+            
+            modelo.addRow(new Object [] {rut, nombre,descEspecialidad, correo, telefono});   
         }
 
-        // Forzar la actualización de la tabla
-        modelo.fireTableDataChanged();
-        this.jtbl_medicos.revalidate();
-        this.jtbl_medicos.repaint();
 
     }//GEN-LAST:event_jbtn_mostrarActionPerformed
 
