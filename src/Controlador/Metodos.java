@@ -56,7 +56,7 @@ public class Metodos {
 
         try {
 
-            Connection conex = ConexionBaseDatos.conectar();;
+            Connection conex = ConexionBaseDatos.conectar();
 
             String query = "INSERT INTO MEDICO(DESC_ESPECIALIDAD,NUMRUT_MEDICO,NOMBRE_MEDICO,CORREO_MEDICO,TELEFONO_MEDICO) VALUES (?,?,?,?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
@@ -425,9 +425,9 @@ public class Metodos {
         
     }
     
-    public int ObtenerID(String desc){
+    public String ObtenerID(String desc){
         
-        int idEspecialidad = 0;
+        String idEspecialidad = null;
         
         try {
             
@@ -437,7 +437,7 @@ public class Metodos {
             stmt.setString(1, desc);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                idEspecialidad = rs.getInt("ID_ESPECIALIDAD");
+                idEspecialidad = rs.getString("ID_ESPECIALIDAD");
             }
              rs.close();
              stmt.close();
@@ -448,17 +448,38 @@ public class Metodos {
         }
         return idEspecialidad; 
     }
-}
+    public ArrayList<Horario> obtenerHorarios(){
+        ArrayList<Horario>Horarios = new ArrayList<>();
+        try {
+             Connection conex = ConexionBaseDatos.conectar();
+             
+             String sql = "SELECT DIA_HORARIO, MES_HORARIO, ANO_HORARIO, HORA, NUMRUT_MEDICO, ESTADO FROM HORARIO;";
+             PreparedStatement stmt = conex.prepareStatement(sql);
+             
+           
+             
+             ResultSet rs = stmt.executeQuery();
+             
+             while(rs.next()){
+                 Horario horario = new Horario();
+                 horario.setDia(rs.getInt("DIA_HORARIO"));
+                 horario.setMes(rs.getInt("MES_HORARIO"));
+                 horario.setAno(rs.getInt("ANO_HORARIO"));
+                 horario.setHora(rs.getString("HORA"));
+                 horario.setNumRut(rs.getString("NUMRUT_MEDICO"));
+                 horario.setEstado(rs.getString("ESTADO"));
+                 
+                 Horarios.add(horario);
+                 
+             }
+             
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  
+        return Horarios;
+    }
     
-//    public ArrayList<Horario> Horarios(String especialidad){
-//        
-//        ArrayList<Horario> lista = new ArrayList<>();
-//        try {
-//            
-//            Connection conex = ConexionBaseDatos.conectar();
-//            String sql = "SELECT * FROM HORARIO WHERE "
-//        
-//        
-//        
-//    }
-//}
+}
+
+    
+

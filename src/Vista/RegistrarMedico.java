@@ -161,7 +161,7 @@ public class RegistrarMedico extends javax.swing.JFrame {
         String rut, nombre, correo, especialidad;
         int telefono;
         
-        especialidad = me.ObtenerID(jComboBox1.getSelectedItem().toString());
+        especialidad = jComboBox1.getSelectedItem().toString();
 
         rut = this.jtxt_rut.getText();
         nombre = this.jtxt_nombre.getText();
