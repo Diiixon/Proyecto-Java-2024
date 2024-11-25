@@ -90,23 +90,23 @@ public class Metodos {
 
             Connection conex = ConexionBaseDatos.conectar();
 
-            String query = """
-                           SELECT 
-                               m.NUMRUT_MEDICO AS RutMedico,
-                               m.NOMBRE_MEDICO AS NombreMedico,
-                               m.CORREO_MEDICO AS CorreoMedico,
-                               m.TELEFONO_MEDICO AS TelefonoMedico,
-                               e.DESC_ESPECIALIDAD AS Especialidad
-                           FROM 
-                               MEDICO m
-                           INNER JOIN 
-                               ESPECIALIDAD e 
-                           ON 
-                               m.DESC_ESPECIALIDAD = e.ID_ESPECIALIDAD
-                           ORDER BY 
-                               e.DESC_ESPECIALIDAD;
-                           """;
-//            String query = "SELECT * FROM MEDICO ORDER BY id_especialidad";
+//            String query = """
+//                           SELECT 
+//                               m.NUMRUT_MEDICO AS RutMedico,
+//                               m.NOMBRE_MEDICO AS NombreMedico,
+//                               m.CORREO_MEDICO AS CorreoMedico,
+//                               m.TELEFONO_MEDICO AS TelefonoMedico,
+//                               e.DESC_ESPECIALIDAD AS Especialidad
+//                           FROM 
+//                               MEDICO m
+//                           INNER JOIN 
+//                               ESPECIALIDAD e 
+//                           ON 
+//                               m.DESC_ESPECIALIDAD = e.ID_ESPECIALIDAD
+//                           ORDER BY 
+//                               e.DESC_ESPECIALIDAD;
+//                           """;
+            String query = "SELECT * FROM MEDICO ORDER BY numrut_medico";
             PreparedStatement stmt = conex.prepareStatement(query);
 
             ResultSet rs = stmt.executeQuery();

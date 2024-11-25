@@ -5,6 +5,8 @@
 
 package Vista;
 
+import Controlador.Metodos;
+
 /**
  *
  * @author Dixon Tapia Aguilera
@@ -12,12 +14,15 @@ package Vista;
 public class ReservarCita extends javax.swing.JFrame {
 
     /** Creates new form ReservarCita */
+    Metodos me = new Metodos();
     public ReservarCita() {
         initComponents();
         setSize(900,600);
         setResizable(false);
         setLocationRelativeTo(null);
+        me.RellenarCombo("MEDICO", "NOMBRE_MEDICO", this.jcbx_medico);
     }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -31,6 +36,10 @@ public class ReservarCita extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jcbx_medico = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reservando Cita");
@@ -47,6 +56,18 @@ public class ReservarCita extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(167, 219, 216));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jcbx_medico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
+        jPanel2.add(jcbx_medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 310, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Médico");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Horas --", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00" }));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 100, 30));
+        jPanel2.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 440, 290));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
         pack();
@@ -88,9 +109,13 @@ public class ReservarCita extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar jCalendar1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox<String> jcbx_medico;
     // End of variables declaration//GEN-END:variables
 
 }
