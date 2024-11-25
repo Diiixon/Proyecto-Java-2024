@@ -117,8 +117,8 @@ public class HoraDisponible extends javax.swing.JFrame {
             mes = horario.getMes();
             ano = horario.getAno();
             
-            if (estado == "1") {
-                estado = "Dispobible"; 
+            if ("1".equals(estado)) {
+                estado = "Disponible"; 
             }else{
                 estado = "Reservado";
             }
