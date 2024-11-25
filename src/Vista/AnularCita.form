@@ -121,7 +121,7 @@
             <Component class="javax.swing.JTable" name="jtbl_citas">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="4">
+                  <Table columnCount="5" rowCount="0">
                     <Column editable="true" title="ID Cita" type="java.lang.Object"/>
                     <Column editable="true" title="Rut Usuario" type="java.lang.Object"/>
                     <Column editable="true" title="Fecha Cita" type="java.lang.Object"/>

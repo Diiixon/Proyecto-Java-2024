@@ -6,7 +6,6 @@ package Vista;
 
 import Controlador.Metodos;
 import Modelo.Usuario;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -78,7 +77,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Usuario", "Nombre", "Correo", "Teléfono", "Fecha Nacimiento"
+                "RUT", "Nombre", "Correo", "Teléfono", "Fecha Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -160,10 +159,10 @@ public class EliminarUsuario extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.jtbl_usuarios.getModel();
 
         modelo.setRowCount(0);
+        
+        Usuario usuario = metodos.buscarUsuario(this.jtxt_rutUsuario.getText());
 
-        ArrayList<Usuario> lista = metodos.buscarUsuario(this.jtxt_rutUsuario.getText());
-
-        for (Usuario usuario : lista) {
+        if (usuario != null) {
             dia = usuario.getDia();
             mes = usuario.getMes();
             ano = usuario.getAno();
@@ -176,7 +175,7 @@ public class EliminarUsuario extends javax.swing.JFrame {
             modelo.addRow(new Object[]{rut, nombre, correo, telefono, fecNac});
 
         }
-        if (lista.isEmpty()) {
+        else {
             JOptionPane.showMessageDialog(null, "Usuario no exise en los registros","No Encontrado",0);
         }
 

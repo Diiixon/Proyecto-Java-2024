@@ -45,6 +45,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_eliminarUsuario = new javax.swing.JMenuItem();
         jmi_eliminarMedico = new javax.swing.JMenuItem();
         jmi_eliminarEspecialidad = new javax.swing.JMenuItem();
+        jmi_actualizarUsuario = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -157,6 +158,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jmi_eliminarEspecialidad);
 
+        jmi_actualizarUsuario.setText("Actualizar Usuario");
+        jmi_actualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_actualizarUsuarioActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmi_actualizarUsuario);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ayuda");
@@ -266,6 +275,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbtn_anularCitaActionPerformed
 
+    private void jmi_actualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_actualizarUsuarioActionPerformed
+        // TODO add your handling code here:
+        ActualizarUsuario au = new ActualizarUsuario();
+        au.setVisible(true);
+        
+    }//GEN-LAST:event_jmi_actualizarUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -314,6 +330,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtn_anularCita;
     private javax.swing.JButton jbtn_horaDisponible;
+    private javax.swing.JMenuItem jmi_actualizarUsuario;
     private javax.swing.JMenuItem jmi_eliminarEspecialidad;
     private javax.swing.JMenuItem jmi_eliminarMedico;
     private javax.swing.JMenuItem jmi_eliminarUsuario;
