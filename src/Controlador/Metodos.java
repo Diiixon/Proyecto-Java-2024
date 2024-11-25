@@ -92,19 +92,19 @@ public class Metodos {
 
             String query = """
                            SELECT 
-                               m.NUMRUT_MEDICO AS RutMedico,
-                               m.NOMBRE_MEDICO AS NombreMedico,
-                               m.CORREO_MEDICO AS CorreoMedico,
-                               m.TELEFONO_MEDICO AS TelefonoMedico,
-                               e.DESC_ESPECIALIDAD AS Especialidad
-                           FROM 
-                               MEDICO m
-                           INNER JOIN 
-                               ESPECIALIDAD e 
-                           ON 
-                               m.DESC_ESPECIALIDAD = e.ID_ESPECIALIDAD
-                           ORDER BY 
-                               e.DESC_ESPECIALIDAD;
+                                   m.NUMRUT_MEDICO AS RutMedico,
+                                   m.NOMBRE_MEDICO AS NombreMedico,
+                                   m.CORREO_MEDICO AS CorreoMedico,
+                                   m.TELEFONO_MEDICO AS TelefonoMedico,
+                                   e.DESC_ESPECIALIDAD AS Especialidad
+                               FROM 
+                                   MEDICO m
+                               INNER JOIN 
+                                   ESPECIALIDAD e 
+                               ON 
+                                   m.DESC_ESPECIALIDAD = e.DESC_ESPECIALIDAD  -- Relación por el nombre de la especialidad
+                               ORDER BY 
+                                   e.DESC_ESPECIALIDAD;
                            """;
 //            String query = "SELECT * FROM MEDICO ORDER BY id_especialidad";
             PreparedStatement stmt = conex.prepareStatement(query);
@@ -341,7 +341,7 @@ public class Metodos {
 
             Connection conex = ConexionBaseDatos.conectar();
 
-            String query = "SELECT * FROM MEDICO WHERE numrut_medico = ?";
+            String query = "SELECT * FROM MEDICO WHERE NUMRUT_MEDICO = ?";
             PreparedStatement stmt = conex.prepareStatement(query);
 
             stmt.setString(1, rut);
@@ -479,6 +479,18 @@ public class Metodos {
         return Horarios;
     }
     
+    public Medico buscarMedicoPorRut(ArrayList<Medico> listaMedicos, String numrut) {
+    for (Medico medico : listaMedicos) {
+        if (medico.getNumRut().equals(numrut)) {
+            System.out.println("Medico enviado");
+            return medico;
+        }
+    }   
+        System.out.println(listaMedicos);
+        System.out.println("Medico no enviado");
+    return null; // Si no se encuentra el médico
+    
+    }
 }
 
     

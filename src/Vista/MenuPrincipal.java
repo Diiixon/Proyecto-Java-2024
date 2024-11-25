@@ -214,7 +214,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jbtn_horaDisponibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_horaDisponibleActionPerformed
         // TODO add your handling code here:
-       HoraDisponible hb = new HoraDisponible();
+       HoraDisponible2 hb = new HoraDisponible2();
        hb.setVisible(true);
         
     }//GEN-LAST:event_jbtn_horaDisponibleActionPerformed
