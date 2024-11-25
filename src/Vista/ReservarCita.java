@@ -6,6 +6,14 @@
 package Vista;
 
 import Controlador.Metodos;
+import Modelo.Usuario;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
 
 /**
  *
@@ -38,8 +46,21 @@ public class ReservarCita extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jcbx_medico = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbx_hora = new javax.swing.JComboBox<>();
         jCalendar1 = new com.toedter.calendar.JCalendar();
+        jtxt_rutBuscar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jbtn_buscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtbl_usuario = new javax.swing.JTable();
+        jtxt_horaSeleccionada = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jtxt_fechaSeleccionada = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jbtn_guardar = new javax.swing.JButton();
+        jbtn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reservando Cita");
@@ -58,20 +79,185 @@ public class ReservarCita extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jcbx_medico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
-        jPanel2.add(jcbx_medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 310, 30));
+        jPanel2.add(jcbx_medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 310, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Médico");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Horas --", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 100, 30));
-        jPanel2.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 440, 290));
+        jcbx_hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Horas --", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00" }));
+        jcbx_hora.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jcbx_horaPropertyChange(evt);
+            }
+        });
+        jPanel2.add(jcbx_hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 110, 30));
+
+        jCalendar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendar1PropertyChange(evt);
+            }
+        });
+        jPanel2.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 390, 220));
+
+        jtxt_rutBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_rutBuscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jtxt_rutBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 170, 30));
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel3.setText("Rut Usuario:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+
+        jbtn_buscar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jbtn_buscar.setText("Buscar");
+        jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_buscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbtn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
+
+        jtbl_usuario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Fecha Nacimiento", "Correo", "Teléfono"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jtbl_usuario);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 760, 70));
+
+        jtxt_horaSeleccionada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_horaSeleccionadaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jtxt_horaSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 260, 120, 30));
+
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel8.setText("Seleccione Fecha");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        jLabel4.setText("Seleccione Hora");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
+
+        jtxt_fechaSeleccionada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_fechaSeleccionadaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jtxt_fechaSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 120, 30));
+
+        jLabel5.setText("Fecha Seleccionada");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, -1, -1));
+
+        jLabel6.setText("Hora Seleccionada");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, -1, -1));
+
+        jbtn_guardar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jbtn_guardar.setText("Guardar");
+        jbtn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_guardarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbtn_guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 120, -1));
+
+        jbtn_cancelar.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jbtn_cancelar.setText("Cancelar");
+        jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 120, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtxt_rutBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_rutBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_rutBuscarActionPerformed
+
+    private void jbtn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_guardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtn_guardarActionPerformed
+
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
+        // TODO add your handling code here:
+        
+        int dia,mes,ano,telefono;
+        String rut,nombre,correo,fecNac;
+        
+        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_usuario.getModel();
+        
+        modelo.setRowCount(0);
+        
+        Usuario usuario = me.buscarUsuario(this.jtxt_rutBuscar.getText());
+        
+        if (usuario != null) {
+            dia = usuario.getDia();
+            mes = usuario.getMes();
+            ano = usuario.getAno();
+            fecNac = dia+"-"+mes+"-"+ano;
+            nombre = usuario.getNombre();
+            correo = usuario.getCorreo();
+            telefono = usuario.getNumTelefono();
+            
+            modelo.addRow(new Object [] {nombre,fecNac,correo,telefono});
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Usuario no existe en los registros","No Encontrado",0);
+        }
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
+
+    private void jCalendar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCalendar1PropertyChange
+        // TODO add your handling code here:
+        if (evt.getOldValue() != null) {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            this.jtxt_fechaSeleccionada.setText(formatoFecha.format(this.jCalendar1.getCalendar().getTime()));
+            
+        }
+        
+    }//GEN-LAST:event_jCalendar1PropertyChange
+
+    private void jtxt_horaSeleccionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_horaSeleccionadaActionPerformed
+        // TODO add your handling code here:
+        
+//        String hora = String.valueOf(this.jcbx_hora.getSelectedIndex());
+//        this.jtxt_horaSeleccionada.setText(hora);
+    }//GEN-LAST:event_jtxt_horaSeleccionadaActionPerformed
+
+    private void jcbx_horaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jcbx_horaPropertyChange
+        // TODO add your handling code here:
+//        this.jcbx_hora.addActionListener(new ActionListener(){
+//            public void horaSeleccionada(ActionEvent e){
+//                String horaSeleccionada = (String) jcbx_hora.getSelectedItem();
+//                jtxt_horaSeleccionada.setText(horaSeleccionada);
+//            }
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            }
+//        });
+        
+    }//GEN-LAST:event_jcbx_horaPropertyChange
+
+    private void jtxt_fechaSeleccionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_fechaSeleccionadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_fechaSeleccionadaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,12 +296,25 @@ public class ReservarCita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbtn_buscar;
+    private javax.swing.JButton jbtn_cancelar;
+    private javax.swing.JButton jbtn_guardar;
+    private javax.swing.JComboBox<String> jcbx_hora;
     private javax.swing.JComboBox<String> jcbx_medico;
+    private javax.swing.JTable jtbl_usuario;
+    private javax.swing.JTextField jtxt_fechaSeleccionada;
+    private javax.swing.JTextField jtxt_horaSeleccionada;
+    private javax.swing.JTextField jtxt_rutBuscar;
     // End of variables declaration//GEN-END:variables
 
 }
