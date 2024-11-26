@@ -208,7 +208,7 @@ public class AnularCita extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "No se registran citas para el RUT proporcionado.");
     } else {
         for (Cita cita : citas) {
-            modelo.addRow(new Object[]{cita.getIdCita(), cita.getNumRutUsuario(), cita.getFechaCita(), cita.getHoraCita(), cita.getNumRutMedico(), cita.getMotivo()});
+            modelo.addRow(new Object[]{cita.getIdCita(), cita.getNumRutUsuario(), cita.getFechaCita(), cita.getHoraCita(), cita.getNumRutMedico()});
         }
     }
 }

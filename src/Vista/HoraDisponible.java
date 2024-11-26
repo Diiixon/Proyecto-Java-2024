@@ -8,6 +8,7 @@ import Controlador.Metodos;
 import Modelo.Especialidad;
 import Modelo.Horario;
 import Modelo.Medico;
+import Modelo.Usuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +28,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         setSize(900,600);
         setResizable(false);
         setLocationRelativeTo(null);
-        
+        me.RellenarCombo("ESPECIALIDAD", "DESC_ESPECIALIDAD", jcbx_especialidad);
         
     }
 
@@ -56,6 +57,15 @@ public class HoraDisponible extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jtxt_estado = new javax.swing.JTextField();
+        jcbx_especialidad = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jtxt_rutcliente = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtbl_cliente = new javax.swing.JTable();
+        jbtn_reservar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jtxt_rutdoc = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,16 +121,16 @@ public class HoraDisponible extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtb_Disponible);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 710, 160));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 580, 230));
 
-        jbtn_Mostrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_Mostrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbtn_Mostrar.setText("Mostrar");
         jbtn_Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_MostrarActionPerformed(evt);
             }
         });
-        jPanel4.add(jbtn_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 130, 40));
+        jPanel4.add(jbtn_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 100, 20));
 
         jtxt_fecha.setEditable(false);
         jtxt_fecha.addActionListener(new java.awt.event.ActionListener() {
@@ -128,32 +138,91 @@ public class HoraDisponible extends javax.swing.JFrame {
                 jtxt_fechaActionPerformed(evt);
             }
         });
-        jPanel4.add(jtxt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 160, -1));
+        jPanel4.add(jtxt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 160, -1));
 
         jtxt_hora.setEditable(false);
-        jPanel4.add(jtxt_hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 160, -1));
+        jPanel4.add(jtxt_hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 80, 160, -1));
 
         jtxt_nombre.setEditable(false);
-        jPanel4.add(jtxt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 130, -1));
+        jPanel4.add(jtxt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, 160, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Fecha:");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Hora:");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Nombre:");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Estado:");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
 
         jtxt_estado.setEditable(false);
-        jPanel4.add(jtxt_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 150, -1));
+        jPanel4.add(jtxt_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 160, -1));
+
+        jcbx_especialidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jPanel4.add(jcbx_especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 220, -1));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Rut Cliente:");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        jPanel4.add(jtxt_rutcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 240, -1));
+
+        jtbl_cliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Fecha Nacimiento", "Correo", "Telefono"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jtbl_cliente);
+
+        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 660, 50));
+
+        jbtn_reservar.setText("Reservar");
+        jbtn_reservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_reservarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jbtn_reservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 210, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("RUT:");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
+
+        jtxt_rutdoc.setEditable(false);
+        jPanel4.add(jtxt_rutdoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, 160, -1));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
@@ -169,6 +238,8 @@ public class HoraDisponible extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.jtb_Disponible.getModel();
         
         ArrayList<Horario> lista = me.obtenerHorarios();
+        
+        modelo.setRowCount(0);
         
         for (Horario horario : lista) {
             numrut = horario.getNumRut();
@@ -189,8 +260,12 @@ public class HoraDisponible extends javax.swing.JFrame {
             
             nombre = medico.getNombre();
             especialidad = medico.getDescEspecialidad();
-            
-            modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,nombre,especialidad,estado});
+            if (jcbx_especialidad.getSelectedItem().equals(especialidad)) {
+                modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,nombre,especialidad,estado});
+            }
+            else{
+                System.out.println("No hay doctores con esa especialidad");
+            }
         }
         
     }//GEN-LAST:event_jbtn_MostrarActionPerformed
@@ -213,7 +288,8 @@ public class HoraDisponible extends javax.swing.JFrame {
             jtxt_estado.setText(estado);
             jtxt_fecha.setText(fecha);
             jtxt_nombre.setText(nombre);
-            jtxt_hora.setText(hora);    
+            jtxt_hora.setText(hora); 
+            jtxt_rutdoc.setText(RutDoc);
         }
         
         
@@ -222,6 +298,54 @@ public class HoraDisponible extends javax.swing.JFrame {
     private void jtxt_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_fechaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxt_fechaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        int dia,mes,ano,telefono;
+        String rut,nombre,correo,fecNac;
+        
+        DefaultTableModel modelo = (DefaultTableModel) this.jtbl_cliente.getModel();
+        
+        modelo.setRowCount(0);
+        
+        Usuario usuario = me.buscarUsuario(this.jtxt_rutcliente.getText());
+        
+        if (usuario != null) {
+            dia = usuario.getDia();
+            mes = usuario.getMes();
+            ano = usuario.getAno();
+            fecNac = dia+"-"+mes+"-"+ano;
+            nombre = usuario.getNombre();
+            correo = usuario.getCorreo();
+            telefono = usuario.getNumTelefono();
+            
+            modelo.addRow(new Object [] {nombre,fecNac,correo,telefono});
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Usuario no existe en los registros","No Encontrado",0);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jbtn_reservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_reservarActionPerformed
+        // TODO add your handling code here:
+        
+        if (jtxt_nombre == null) {
+            JOptionPane.showMessageDialog(null, "Seleccione una hora primero ","Error",0);  
+        }
+        if (jtxt_estado.getText().equalsIgnoreCase("Reservado")) {
+            JOptionPane.showMessageDialog(null, "Seleccione una hora disponible ","Error",0);  
+        }
+        String rutDoc = jtxt_rutdoc.getText();
+        me.ReservarHora(rutDoc);
+        
+        me.AgregarCita(jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
+        
+        
+        
+      
+    }//GEN-LAST:event_jbtn_reservarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,21 +383,30 @@ public class HoraDisponible extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbtn_Mostrar;
+    private javax.swing.JButton jbtn_reservar;
+    private javax.swing.JComboBox<String> jcbx_especialidad;
     private javax.swing.JTable jtb_Disponible;
+    private javax.swing.JTable jtbl_cliente;
     private javax.swing.JTextField jtxt_estado;
     private javax.swing.JTextField jtxt_fecha;
     private javax.swing.JTextField jtxt_hora;
     private javax.swing.JTextField jtxt_nombre;
+    private javax.swing.JTextField jtxt_rutcliente;
+    private javax.swing.JTextField jtxt_rutdoc;
     // End of variables declaration//GEN-END:variables
 }
