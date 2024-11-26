@@ -330,6 +330,18 @@ public class HoraDisponible extends javax.swing.JFrame {
 
     private void jbtn_reservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_reservarActionPerformed
         // TODO add your handling code here:
+        int dia = 0;
+        int mes = 0;
+        int ano = 0;
+        String fecha = jtxt_fecha.getText();
+        
+        try {
+            String [] partesfecha = fecha.split("/");
+            dia = Integer.parseInt(partesfecha[0]);
+            mes = Integer.parseInt(partesfecha[1]);
+            ano = Integer.parseInt(partesfecha[2]);
+        } catch (Exception e) {
+        }
         
         if (jtxt_nombre == null) {
             JOptionPane.showMessageDialog(null, "Seleccione una hora primero ","Error",0);  
@@ -338,7 +350,7 @@ public class HoraDisponible extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una hora disponible ","Error",0);  
         }
         String rutDoc = jtxt_rutdoc.getText();
-        me.ReservarHora(rutDoc);
+        me.ReservarHora(rutDoc, dia, mes, ano,jtxt_hora.getText());
         
         me.AgregarCita(jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
         
