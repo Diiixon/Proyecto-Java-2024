@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.Metodos;
 import Modelo.Medico;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -127,6 +128,8 @@ public class RegistrarMedico extends javax.swing.JFrame {
         Medico medico = new Medico(especialidad, rut, nombre, correo, telefono);
         Metodos metodos = new Metodos();
         metodos.registrarMedico(medico);
+        
+        JOptionPane.showMessageDialog(null, "Médico registrado correctamente!","Registrar Médico",1);
     }//GEN-LAST:event_jbtn_guardarActionPerformed
 
     /**

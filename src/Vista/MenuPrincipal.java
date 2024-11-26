@@ -34,7 +34,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jbtn_anularCita = new javax.swing.JButton();
         jbtn_horaDisponible = new javax.swing.JButton();
-        jbtn_reservarCita = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -47,6 +46,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_eliminarMedico = new javax.swing.JMenuItem();
         jmi_eliminarEspecialidad = new javax.swing.JMenuItem();
         jmi_actualizarUsuario = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -82,15 +82,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jbtn_horaDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 200, 100));
-
-        jbtn_reservarCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jbtn_reservarCita.setText("Reservar Cita");
-        jbtn_reservarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_reservarCitaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jbtn_reservarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 200, 100));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(116, 30));
 
@@ -175,6 +166,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jmi_actualizarUsuario);
+
+        jMenuItem5.setText("Ingresar Horarios");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
 
@@ -292,11 +291,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmi_actualizarUsuarioActionPerformed
 
-    private void jbtn_reservarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_reservarCitaActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        ReservarCita rc = new ReservarCita();
-        rc.setVisible(true);
-    }//GEN-LAST:event_jbtn_reservarCitaActionPerformed
+        IngresarHorario ih = new IngresarHorario();
+        ih.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,10 +342,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtn_anularCita;
     private javax.swing.JButton jbtn_horaDisponible;
-    private javax.swing.JButton jbtn_reservarCita;
     private javax.swing.JMenuItem jmi_actualizarUsuario;
     private javax.swing.JMenuItem jmi_eliminarEspecialidad;
     private javax.swing.JMenuItem jmi_eliminarMedico;

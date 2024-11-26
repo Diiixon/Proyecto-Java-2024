@@ -342,7 +342,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         
         me.AgregarCita(jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
         
-        
+        JOptionPane.showMessageDialog(null, "Reserva Médica Realizada","Reserva",1);
         
       
     }//GEN-LAST:event_jbtn_reservarActionPerformed

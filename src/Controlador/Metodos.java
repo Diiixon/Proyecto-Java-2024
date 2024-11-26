@@ -299,7 +299,7 @@ public class Metodos {
     }
 
     public Usuario buscarUsuario(String rut) {
-        
+
         Usuario usuario = null;
         try {
 
@@ -402,34 +402,30 @@ public class Metodos {
         return lista;
     }
 
-    public void RellenarCombo(String tabla, String valor, JComboBox combo){
-        
+    public void RellenarCombo(String tabla, String valor, JComboBox combo) {
+
         String sql = "select * from " + tabla;
         Statement st;
         Connection conex = ConexionBaseDatos.conectar();
-        
+
         try {
             st = conex.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
+            while (rs.next()) {
                 combo.addItem(rs.getString(valor));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error" + e.toString());
         }
-        
-    
-         
-        
-        
+
     }
-    
-    public String ObtenerID(String desc){
-        
+
+    public String ObtenerID(String desc) {
+
         String idEspecialidad = null;
-        
+
         try {
-            
+
             Connection conex = ConexionBaseDatos.conectar();
             String sql = "select ID_ESPECIALIDAD from ESPECIALIDAD where DESC_ESPECIALIDAD = ? ";
             PreparedStatement stmt = conex.prepareStatement(sql);
@@ -438,46 +434,45 @@ public class Metodos {
             if (rs.next()) {
                 idEspecialidad = rs.getString("ID_ESPECIALIDAD");
             }
-             rs.close();
-             stmt.close();
-             conex.close();
-            
+            rs.close();
+            stmt.close();
+            conex.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return idEspecialidad; 
+        return idEspecialidad;
     }
-    public ArrayList<Horario> obtenerHorarios(){
-        ArrayList<Horario>Horarios = new ArrayList<>();
+
+    public ArrayList<Horario> obtenerHorarios() {
+        ArrayList<Horario> Horarios = new ArrayList<>();
         try {
-             Connection conex = ConexionBaseDatos.conectar();
-             
-             String sql = "SELECT DIA_HORARIO, MES_HORARIO, ANO_HORARIO, HORA, NUMRUT_MEDICO, ESTADO FROM HORARIO;";
-             PreparedStatement stmt = conex.prepareStatement(sql);
-             
-           
-             
-             ResultSet rs = stmt.executeQuery();
-             
-             while(rs.next()){
-                 Horario horario = new Horario();
-                 horario.setDia(rs.getInt("DIA_HORARIO"));
-                 horario.setMes(rs.getInt("MES_HORARIO"));
-                 horario.setAno(rs.getInt("ANO_HORARIO"));
-                 horario.setHora(rs.getString("HORA"));
-                 horario.setNumRut(rs.getString("NUMRUT_MEDICO"));
-                 horario.setEstado(rs.getString("ESTADO"));
-                 
-                 Horarios.add(horario);
-                 
-             }
-             
+            Connection conex = ConexionBaseDatos.conectar();
+
+            String sql = "SELECT DIA_HORARIO, MES_HORARIO, ANO_HORARIO, HORA, NUMRUT_MEDICO, ESTADO FROM HORARIO;";
+            PreparedStatement stmt = conex.prepareStatement(sql);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Horario horario = new Horario();
+                horario.setDia(rs.getInt("DIA_HORARIO"));
+                horario.setMes(rs.getInt("MES_HORARIO"));
+                horario.setAno(rs.getInt("ANO_HORARIO"));
+                horario.setHora(rs.getString("HORA"));
+                horario.setNumRut(rs.getString("NUMRUT_MEDICO"));
+                horario.setEstado(rs.getString("ESTADO"));
+
+                Horarios.add(horario);
+
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }  
+        }
         return Horarios;
     }
-    
+
     public boolean actualizarUsuario(Usuario usuario) {
         try {
             Connection conex = ConexionBaseDatos.conectar();
@@ -508,68 +503,115 @@ public class Metodos {
             return false;
         }
     }
-    
-    public Medico BuscarMedicoPorRut(ArrayList lista,String numrut){
-        
+
+    public Medico BuscarMedicoPorRut(ArrayList lista, String numrut) {
+
         ArrayList<Medico> listaBuscar = lista;
-        
+
         for (Medico medico : listaBuscar) {
             if (medico.getNumRut().equals(numrut)) {
                 return medico;
             }
-            
-        }return null;
+
+        }
+        return null;
     }
-    
-    public void ReservarHora(String RUT){
-        
+
+    public void ReservarHora(String RUT) {
+
         try {
             Connection conex = ConexionBaseDatos.conectar();
-            
+
             String query = "UPDATE HORARIO SET ESTADO = 0 WHERE NUMRUT_MEDICO = ?";
-            
+
             PreparedStatement stmt = conex.prepareStatement(query);
 
             stmt.setString(1, RUT);
             stmt.executeUpdate();
             stmt.close();
             conex.close();
-            
-            
+
         } catch (SQLException e) {
             System.out.println("Error " + e.getMessage());
         }
-        
-        
-    } 
-    public void AgregarCita(String Fecha, String rut_doc,String rut_usu,String hora){
-        
+
+    }
+
+    public void AgregarCita(String Fecha, String rut_doc, String rut_usu, String hora) {
+
         try {
-            
+
             Connection conex = ConexionBaseDatos.conectar();
-            
+
             String query = "INSERT INTO CITA (FECHA_CITA, NUMRUT_USUARIO, NUMRUT_MEDICO, HORA_CITA) VALUES (?,?,?,?)";
-            
+
             PreparedStatement stmt = conex.prepareStatement(query);
-            
+
             stmt.setString(1, Fecha);
             stmt.setString(2, rut_usu);
             stmt.setString(3, rut_doc);
             stmt.setString(4, hora);
-            
+
             stmt.executeUpdate();
             stmt.close();
             conex.close();
-            
 
-            
         } catch (SQLException e) {
             System.out.println("Error Al agregar Cita " + e.getMessage());
         }
-        
+
     }
-    
+
+    public boolean agregarHoras(Horario horario) {
+
+        try {
+            Connection conex = ConexionBaseDatos.conectar();
+
+            String query = "INSERT INTO HORARIO (DIA_HORARIO,MES_HORARIO,ANO_HORARIO,HORA,NUMRUT_MEDICO,ESTADO) VALUES (?,?,?,?,?,?)";
+            PreparedStatement stmt = conex.prepareStatement(query);
+
+            stmt.setInt(1, horario.getDia());
+            stmt.setInt(2, horario.getMes());
+            stmt.setInt(3, horario.getAno());
+            stmt.setString(4, horario.getHora());
+            stmt.setString(5, horario.getNumRut());
+            stmt.setString(6, horario.getEstado());
+
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al ingresar un Horario " + e.getMessage());
+
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error en el método ingresar un Horario " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String obtenerRutMedico(String nombre) {
+        String rutMedico = null;
+
+        String sql = "SELECT NUMRUT_MEDICO FROM MEDICO WHERE NOMBRE_MEDICO = ?";
+
+        try (Connection conex = ConexionBaseDatos.conectar(); PreparedStatement stmt = conex.prepareStatement(sql)) {
+
+            stmt.setString(1, nombre);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    rutMedico = rs.getString("NUMRUT_MEDICO");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rutMedico;
+    }
+
 }
-
-    
-
