@@ -3,49 +3,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador;
-
 import BaseDatos.ConexionBaseDatos;
 import Modelo.Cita;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author orellana
  */
 public class MetodoAnularCita {
+    // Método para obtener las citas de un usuario por su RUT
+    public List<Cita> obtenerCitasPorRut(String rutUsuario) {
+    List<Cita> citas = new ArrayList<>();
+    String sql = "SELECT * FROM CITA WHERE NUMRUT_USUARIO = ?";
     
-    public ArrayList<Cita> obtenerCitasPorRut(String rutUsuario) {
-        ArrayList<Cita> citas = new ArrayList<>();
-        String sql = "SELECT ID_CITA, NUMRUT_USUARIO, FECHA_CITA, HORA_CITA, NUMRUT_MEDICO, MOTIVO FROM CITA WHERE NUMRUT_USUARIO = ?";
-
-        try (Connection conn = ConexionBaseDatos.conectar();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, rutUsuario);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    int idCita = rs.getInt("ID_CITA");
-                    String numRutUsuario = rs.getString("NUMRUT_USUARIO");
-                    String numRutMedico = rs.getString("NUMRUT_MEDICO");
-                    String fechaCita = rs.getString("FECHA_CITA");
-                    String horaCita = rs.getString("HORA_CITA");
-                    String motivo = rs.getString("MOTIVO");
-
-                    Cita cita = new Cita(idCita, numRutUsuario, numRutMedico, fechaCita, horaCita);
-                    citas.add(cita);
-                }
+    try (Connection con = ConexionBaseDatos.conectar(); 
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        ps.setString(1, rutUsuario);  // Asignamos el rutUsuario al PreparedStatement
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Cita cita = new Cita();
+                cita.setIdCita(rs.getInt("ID_CITA"));
+                cita.setNumRutUsuario(rs.getString("NUMRUT_USUARIO"));  // Utilizamos numRutUsuario
+                cita.setFechaCita(rs.getString("FECHA_CITA"));  // Usamos String para la fecha
+                cita.setHoraCita(rs.getString("HORA_CITA"));  // Usamos String para la hora
+                cita.setNumRutMedico(rs.getString("NUMRUT_MEDICO"));  // Utilizamos numRutMedico
+                citas.add(cita);
             }
-        } catch (SQLException e) {
-            System.out.println("Error en SQL al obtener citas: " + e.getMessage());
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return citas;
+    }
+    
+    public void anularCita(int idCita) {
+    String sql = "DELETE FROM CITA WHERE ID_CITA = ?";  // SQL para eliminar la cita
+
+    try (Connection con = ConexionBaseDatos.conectar();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setInt(1, idCita);  // Establecer el ID de la cita que se va a eliminar
+
+        int rowsAffected = ps.executeUpdate();  // Ejecuta la consulta
+
+        if (rowsAffected > 0) {
+            System.out.println("Cita anulada con éxito.");
+        } else {
+            System.out.println("No se pudo anular la cita.");
         }
 
-        return citas;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
+
+    
     
 }

@@ -356,6 +356,8 @@ public class HoraDisponible extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "Reserva Médica Realizada","Reserva",1);
         
+        actualizarHorasDisponibles();
+        
       
     }//GEN-LAST:event_jbtn_reservarActionPerformed
 
@@ -421,4 +423,8 @@ public class HoraDisponible extends javax.swing.JFrame {
     private javax.swing.JTextField jtxt_rutcliente;
     private javax.swing.JTextField jtxt_rutdoc;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarHorasDisponibles() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
