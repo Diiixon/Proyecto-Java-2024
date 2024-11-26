@@ -90,22 +90,6 @@ public class Metodos {
 
             Connection conex = ConexionBaseDatos.conectar();
 
-//            String query = """
-//                           SELECT 
-//                               m.NUMRUT_MEDICO AS RutMedico,
-//                               m.NOMBRE_MEDICO AS NombreMedico,
-//                               m.CORREO_MEDICO AS CorreoMedico,
-//                               m.TELEFONO_MEDICO AS TelefonoMedico,
-//                               e.DESC_ESPECIALIDAD AS Especialidad
-//                           FROM 
-//                               MEDICO m
-//                           INNER JOIN 
-//                               ESPECIALIDAD e 
-//                           ON 
-//                               m.DESC_ESPECIALIDAD = e.ID_ESPECIALIDAD
-//                           ORDER BY 
-//                               e.DESC_ESPECIALIDAD;
-//                           """;
             String query = "SELECT * FROM MEDICO ORDER BY numrut_medico";
             PreparedStatement stmt = conex.prepareStatement(query);
 
@@ -617,46 +601,83 @@ public class Metodos {
 
         return rutMedico;
     }
-    
+
     public ArrayList<Medico> obtenerTodosLosMedicos() {
-    ArrayList<Medico> listaMedicos = new ArrayList<>();
+        ArrayList<Medico> listaMedicos = new ArrayList<>();
 
-    try {
-        
-        Connection conex = ConexionBaseDatos.conectar();
+        try {
 
-       
-        String query = "SELECT DESC_ESPECIALIDAD, NUMRUT_MEDICO, NOMBRE_MEDICO, CORREO_MEDICO, TELEFONO_MEDICO FROM MEDICO"; // Cambia según tu tabla y columnas
-        PreparedStatement stmt = conex.prepareStatement(query);
+            Connection conex = ConexionBaseDatos.conectar();
 
-        
-        ResultSet rs = stmt.executeQuery();
+            String query = "SELECT DESC_ESPECIALIDAD, NUMRUT_MEDICO, NOMBRE_MEDICO, CORREO_MEDICO, TELEFONO_MEDICO FROM MEDICO"; // Cambia según tu tabla y columnas
+            PreparedStatement stmt = conex.prepareStatement(query);
 
-        
-        while (rs.next()) {
-            Medico medico = new Medico();
-            medico.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
-            medico.setNumRut(rs.getString("NUMRUT_MEDICO"));
-            medico.setNombre(rs.getString("NOMBRE_MEDICO"));
-            medico.setCorreo(rs.getString("CORREO_MEDICO"));
-            medico.setNumTelefono(rs.getInt("TELEFONO_MEDICO"));
-            
+            ResultSet rs = stmt.executeQuery();
 
-            listaMedicos.add(medico); 
+            while (rs.next()) {
+                Medico medico = new Medico();
+                medico.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
+                medico.setNumRut(rs.getString("NUMRUT_MEDICO"));
+                medico.setNombre(rs.getString("NOMBRE_MEDICO"));
+                medico.setCorreo(rs.getString("CORREO_MEDICO"));
+                medico.setNumTelefono(rs.getInt("TELEFONO_MEDICO"));
+
+                listaMedicos.add(medico);
+            }
+
+            rs.close();
+            stmt.close();
+            conex.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al obtener la lista de médicos: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error general al obtener la lista de médicos: " + e.getMessage());
         }
 
-        
-        rs.close();
-        stmt.close();
-        conex.close();
-
-    } catch (SQLException e) {
-        System.out.println("Error en SQL al obtener la lista de médicos: " + e.getMessage());
-    } catch (Exception e) {
-        System.out.println("Error general al obtener la lista de médicos: " + e.getMessage());
+        return listaMedicos;
     }
 
-    return listaMedicos;
-}
+    public String obtenerNombreUsuario(String rut) {
+        String nombreUsuario = null;
+
+        String sql = "SELECT NOMBRE_USUARIO FROM USUARIO WHERE NUMRUT_USUARIO = ?";
+
+        try (Connection conex = ConexionBaseDatos.conectar(); PreparedStatement stmt = conex.prepareStatement(sql)) {
+
+            stmt.setString(1, rut);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    nombreUsuario = rs.getString("NOMBRE_USUARIO");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nombreUsuario;
+    }
+    
+    public String obtenerNombreMedico(String rut) {
+        String nombreMedico = null;
+
+        String sql = "SELECT NOMBRE_MEDICO FROM MEDICO WHERE NUMRUT_MEDICO = ?";
+
+        try (Connection conex = ConexionBaseDatos.conectar(); PreparedStatement stmt = conex.prepareStatement(sql)) {
+
+            stmt.setString(1, rut);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    nombreMedico = rs.getString("NOMBRE_MEDICO");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return nombreMedico;
+    }
 
 }

@@ -31,9 +31,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jbtn_anularCita = new javax.swing.JButton();
         jbtn_horaDisponible = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -62,9 +62,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, -1, -1));
-
+        jbtn_anularCita.setBackground(new java.awt.Color(204, 204, 0));
         jbtn_anularCita.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_anularCita.setText("Anular Cita");
         jbtn_anularCita.addActionListener(new java.awt.event.ActionListener() {
@@ -72,16 +70,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jbtn_anularCitaActionPerformed(evt);
             }
         });
-        jPanel1.add(jbtn_anularCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 400, 200, 100));
+        jPanel1.add(jbtn_anularCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 190, 70));
 
+        jbtn_horaDisponible.setBackground(new java.awt.Color(204, 204, 0));
         jbtn_horaDisponible.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jbtn_horaDisponible.setText("Horas Disponibles");
+        jbtn_horaDisponible.setText("Reservar Cita");
         jbtn_horaDisponible.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_horaDisponibleActionPerformed(evt);
             }
         });
-        jPanel1.add(jbtn_horaDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 200, 100));
+        jPanel1.add(jbtn_horaDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 190, 70));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Centro Médico (1).jpg"))); // NOI18N
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 600));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(116, 30));
 
@@ -334,7 +336,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

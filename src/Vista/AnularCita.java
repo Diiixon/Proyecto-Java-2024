@@ -6,7 +6,9 @@
 package Vista;
 
 import Controlador.MetodoAnularCita;
+import Controlador.Metodos;
 import Modelo.Cita;
+import Modelo.Usuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -62,8 +64,9 @@ public class AnularCita extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(167, 219, 216));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Ingrese Rut del Usuario:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 140, 50));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 210, 50));
 
         jtxt_rutDelUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +75,8 @@ public class AnularCita extends javax.swing.JFrame {
         });
         jPanel2.add(jtxt_rutDelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 290, 30));
 
-        jbtn_ok.setText("OK");
+        jbtn_ok.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_ok.setText("Buscar");
         jbtn_ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_okActionPerformed(evt);
@@ -85,7 +89,7 @@ public class AnularCita extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Cita", "Rut Usuario", "Fecha Cita", "Hora Cita", "Rut Médico"
+                "ID Cita", "Nombre", "Fecha Cita", "Hora Cita", "Nombre Médico"
             }
         ) {
             Class[] types = new Class [] {
@@ -105,23 +109,25 @@ public class AnularCita extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtbl_citas);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 120, 740, 270));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 170, 740, 120));
 
+        jbtn_cancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_cancelar.setText("CANCELAR");
         jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_cancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 170, 50));
+        jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 170, 50));
 
+        jbtn_anular.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_anular.setText("ANULAR CITA");
         jbtn_anular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_anularActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtn_anular, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 170, 50));
+        jPanel2.add(jbtn_anular, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 170, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
@@ -200,6 +206,8 @@ public class AnularCita extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
     private void cargarCitas(String rutUsuario) {
+        
+        Metodos metodo = new Metodos();
         MetodoAnularCita metodos = new MetodoAnularCita();
         DefaultTableModel modelo = (DefaultTableModel) jtbl_citas.getModel();
         modelo.setRowCount(0);
@@ -209,7 +217,7 @@ public class AnularCita extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se registran citas para el RUT proporcionado.");
         } else {
             for (Cita cita : citas) {
-                modelo.addRow(new Object[]{cita.getIdCita(), cita.getNumRutUsuario(), cita.getFechaCita(), cita.getHoraCita(), cita.getNumRutMedico()});
+                modelo.addRow(new Object[]{cita.getIdCita(), metodo.obtenerNombreUsuario(rutUsuario), cita.getFechaCita(), cita.getHoraCita(),metodo.obtenerNombreMedico(rutUsuario)});
             }
         }
     }

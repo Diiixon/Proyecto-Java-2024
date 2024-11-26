@@ -75,11 +75,14 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Ingrese Rut del Usuario:"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="60" width="140" height="50"/>
+              <AbsoluteConstraints x="80" y="60" width="210" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -95,7 +98,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="jbtn_ok">
           <Properties>
-            <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtn_okActionPerformed"/>
@@ -112,7 +118,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="82" y="120" width="740" height="270"/>
+              <AbsoluteConstraints x="82" y="170" width="740" height="120"/>
             </Constraint>
           </Constraints>
 
@@ -123,10 +129,10 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
                     <Column editable="false" title="ID Cita" type="java.lang.Integer"/>
-                    <Column editable="false" title="Rut Usuario" type="java.lang.String"/>
+                    <Column editable="false" title="Nombre" type="java.lang.String"/>
                     <Column editable="false" title="Fecha Cita" type="java.lang.String"/>
                     <Column editable="false" title="Hora Cita" type="java.lang.String"/>
-                    <Column editable="false" title="Rut M&#xe9;dico" type="java.lang.String"/>
+                    <Column editable="false" title="Nombre M&#xe9;dico" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -167,6 +173,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="jbtn_cancelar">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="CANCELAR"/>
           </Properties>
           <Events>
@@ -174,12 +183,15 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="530" y="440" width="170" height="50"/>
+              <AbsoluteConstraints x="570" y="380" width="170" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="jbtn_anular">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="ANULAR CITA"/>
           </Properties>
           <Events>
@@ -187,7 +199,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="140" y="440" width="170" height="50"/>
+              <AbsoluteConstraints x="180" y="380" width="170" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
