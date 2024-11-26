@@ -509,6 +509,18 @@ public class Metodos {
         }
     }
     
+    public Medico BuscarMedicoPorRut(ArrayList lista,String numrut){
+        
+        ArrayList<Medico> listaBuscar = lista;
+        
+        for (Medico medico : listaBuscar) {
+            if (medico.getNumRut().equals(numrut)) {
+                return medico;
+            }
+            
+        }return null;
+    }
+    
 }
 
     
