@@ -47,6 +47,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmi_eliminarMedico = new javax.swing.JMenuItem();
         jmi_eliminarEspecialidad = new javax.swing.JMenuItem();
         jmi_actualizarUsuario = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -176,6 +177,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jmi_actualizarUsuario);
 
+        jMenuItem5.setText("Ingresar Horas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ayuda");
@@ -298,6 +307,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         rc.setVisible(true);
     }//GEN-LAST:event_jbtn_reservarCitaActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        IngresarHorario ih = new IngresarHorario();
+        ih.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,6 +358,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbtn_anularCita;
     private javax.swing.JButton jbtn_horaDisponible;

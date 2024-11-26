@@ -521,6 +521,58 @@ public class Metodos {
         }return null;
     }
     
+    public boolean agregarHoras(Horario horario) {
+        
+        try {
+            Connection conex = ConexionBaseDatos.conectar();
+
+            String query = "INSERT INTO HORARIO (DIA_HORARIO,MES_HORARIO,ANO_HORARIO,HORA,NUMRUT_MEDICO,ESTADO) VALUES (?,?,?,?,?,?)";
+            PreparedStatement stmt = conex.prepareStatement(query);
+
+            stmt.setInt(1, horario.getDia());
+            stmt.setInt(2, horario.getMes());
+            stmt.setInt(3, horario.getAno());
+            stmt.setString(4, horario.getHora());
+            stmt.setString(5, horario.getNumRut());
+            stmt.setString(6, horario.getEstado());
+            
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Error en SQL al ingresar un Horario " + e.getMessage());
+
+            return false;
+        } catch (Exception e) {
+            System.out.println("Error en el método ingresar un Horario " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public String obtenerRutMedico(String nombre) {
+    String rutMedico = null;
+
+    String sql = "SELECT NUMRUT_MEDICO FROM MEDICO WHERE NOMBRE_MEDICO = ?";
+    
+    try (Connection conex = ConexionBaseDatos.conectar();
+         PreparedStatement stmt = conex.prepareStatement(sql)) {
+        
+        stmt.setString(1, nombre);
+        try (ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                rutMedico = rs.getString("NUMRUT_MEDICO");
+            }
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace(); 
+    }
+    
+    return rutMedico;
+}
 }
 
     
