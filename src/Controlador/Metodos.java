@@ -517,16 +517,20 @@ public class Metodos {
         return null;
     }
 
-    public void ReservarHora(String RUT) {
+    public void ReservarHora(String RUT, int DIA, int MES, int ANO, String HORA) {
 
         try {
             Connection conex = ConexionBaseDatos.conectar();
 
-            String query = "UPDATE HORARIO SET ESTADO = 0 WHERE NUMRUT_MEDICO = ?";
+            String query = "UPDATE HORARIO SET ESTADO = 0 WHERE NUMRUT_MEDICO = ? AND HORA = ? AND DIA_HORARIO = ? AND MES_HORARIO = ? AND ANO_HORARIO = ?";
 
             PreparedStatement stmt = conex.prepareStatement(query);
 
             stmt.setString(1, RUT);
+            stmt.setString(2, HORA);
+            stmt.setInt(3, DIA);
+            stmt.setInt(4, MES);
+            stmt.setInt(5, ANO);
             stmt.executeUpdate();
             stmt.close();
             conex.close();
