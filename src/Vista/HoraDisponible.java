@@ -339,8 +339,15 @@ public class HoraDisponible extends javax.swing.JFrame {
         }
         String rutDoc = jtxt_rutdoc.getText();
         me.ReservarHora(rutDoc);
+        if (jtxt_rutcliente.getText() != null) {
+            me.AgregarCita(jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "Seleccione el rut del cliente ","Error",0);
+        }
         
-        me.AgregarCita(jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
+        
+        
         
         
         
