@@ -238,6 +238,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) this.jtb_Disponible.getModel();
         
         ArrayList<Horario> lista = me.obtenerHorarios();
+        ArrayList<Medico> listaMedicos = me.obtenerTodosLosMedicos();
         
         modelo.setRowCount(0);
         
@@ -254,20 +255,21 @@ public class HoraDisponible extends javax.swing.JFrame {
             }else{
                 estado = "Reservado";
             }
-            
-            ArrayList<Medico> lista_medico = me.buscarMedico(numrut);
-            Medico medico = me.BuscarMedicoPorRut(lista_medico, numrut);
+            Medico medico = null;
+            for (Medico med : listaMedicos) {
+                if (med.getNumRut().equals(numrut)) {
+                    medico = med;
+                    break;
+                }
+            }
             
             nombre = medico.getNombre();
             especialidad = medico.getDescEspecialidad();
+            
             if (jcbx_especialidad.getSelectedItem().equals(especialidad)) {
                 modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,nombre,especialidad,estado});
             }
-            else{
-                System.out.println("No hay doctores con esa especialidad");
-            }
-        }
-        
+        } 
     }//GEN-LAST:event_jbtn_MostrarActionPerformed
 
     private void jtb_DisponibleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_DisponibleMouseClicked

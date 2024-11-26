@@ -617,5 +617,46 @@ public class Metodos {
 
         return rutMedico;
     }
+    
+    public ArrayList<Medico> obtenerTodosLosMedicos() {
+    ArrayList<Medico> listaMedicos = new ArrayList<>();
+
+    try {
+        
+        Connection conex = ConexionBaseDatos.conectar();
+
+       
+        String query = "SELECT DESC_ESPECIALIDAD, NUMRUT_MEDICO, NOMBRE_MEDICO, CORREO_MEDICO, TELEFONO_MEDICO FROM MEDICO"; // Cambia según tu tabla y columnas
+        PreparedStatement stmt = conex.prepareStatement(query);
+
+        
+        ResultSet rs = stmt.executeQuery();
+
+        
+        while (rs.next()) {
+            Medico medico = new Medico();
+            medico.setDescEspecialidad(rs.getString("DESC_ESPECIALIDAD"));
+            medico.setNumRut(rs.getString("NUMRUT_MEDICO"));
+            medico.setNombre(rs.getString("NOMBRE_MEDICO"));
+            medico.setCorreo(rs.getString("CORREO_MEDICO"));
+            medico.setNumTelefono(rs.getInt("TELEFONO_MEDICO"));
+            
+
+            listaMedicos.add(medico); 
+        }
+
+        
+        rs.close();
+        stmt.close();
+        conex.close();
+
+    } catch (SQLException e) {
+        System.out.println("Error en SQL al obtener la lista de médicos: " + e.getMessage());
+    } catch (Exception e) {
+        System.out.println("Error general al obtener la lista de médicos: " + e.getMessage());
+    }
+
+    return listaMedicos;
+}
 
 }
