@@ -521,6 +521,54 @@ public class Metodos {
         }return null;
     }
     
+    public void ReservarHora(String RUT){
+        
+        try {
+            Connection conex = ConexionBaseDatos.conectar();
+            
+            String query = "UPDATE HORARIO SET ESTADO = 0 WHERE NUMRUT_MEDICO = ?";
+            
+            PreparedStatement stmt = conex.prepareStatement(query);
+
+            stmt.setString(1, RUT);
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+            
+            
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        
+        
+    } 
+    public void AgregarCita(String Fecha, String rut_doc,String rut_usu,String hora){
+        
+        try {
+            
+            Connection conex = ConexionBaseDatos.conectar();
+            
+            String query = "INSERT INTO CITA (FECHA_CITA, NUMRUT_USUARIO, NUMRUT_MEDICO, HORA_CITA) VALUES (?,?,?,?)";
+            
+            PreparedStatement stmt = conex.prepareStatement(query);
+            
+            stmt.setString(1, Fecha);
+            stmt.setString(2, rut_usu);
+            stmt.setString(3, rut_doc);
+            stmt.setString(4, hora);
+            
+            stmt.executeUpdate();
+            stmt.close();
+            conex.close();
+            
+
+            
+        } catch (SQLException e) {
+            System.out.println("Error Al agregar Cita " + e.getMessage());
+        }
+        
+    }
+    
 }
 
     

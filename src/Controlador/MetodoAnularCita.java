@@ -33,11 +33,11 @@ public class MetodoAnularCita {
                     int idCita = rs.getInt("ID_CITA");
                     String numRutUsuario = rs.getString("NUMRUT_USUARIO");
                     String numRutMedico = rs.getString("NUMRUT_MEDICO");
-                    Date fechaCita = rs.getDate("FECHA_CITA");
-                    Time horaCita = rs.getTime("HORA_CITA");
+                    String fechaCita = rs.getString("FECHA_CITA");
+                    String horaCita = rs.getString("HORA_CITA");
                     String motivo = rs.getString("MOTIVO");
 
-                    Cita cita = new Cita(idCita, numRutUsuario, numRutMedico, fechaCita, horaCita, motivo);
+                    Cita cita = new Cita(idCita, numRutUsuario, numRutMedico, fechaCita, horaCita);
                     citas.add(cita);
                 }
             }
