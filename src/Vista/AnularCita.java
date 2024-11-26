@@ -87,7 +87,22 @@ public class AnularCita extends javax.swing.JFrame {
             new String [] {
                 "ID Cita", "Rut Usuario", "Fecha Cita", "Hora Cita", "Rut Médico"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtbl_citas);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 120, 740, 270));
@@ -117,26 +132,43 @@ public class AnularCita extends javax.swing.JFrame {
         // TODO add your handling code here:
     // Obtener el RUT del usuario desde el campo de texto
         String rutUsuario = jtxt_rutDelUsuario.getText();
+        
+        int dia = 0;
+        int mes= 0;
+        int ano = 0;
+        String rut_DelMedico, hora;
         // Obtener la fila seleccionada en la tabla de citas
         int selectedRow = jtbl_citas.getSelectedRow();
+       
         
         if (selectedRow != -1) {
             // Obtener el ID de la cita seleccionada
             int idCita = (int) jtbl_citas.getValueAt(selectedRow, 0);
+            String fecha = (String) jtbl_citas.getValueAt(selectedRow, 2);
+            hora = (String) jtbl_citas.getValueAt(selectedRow, 3);
+            String [] partefecha = fecha.split("/");
+            dia = Integer.parseInt(partefecha[0]);
+            mes = Integer.parseInt(partefecha[1]);
+            ano = Integer.parseInt(partefecha[2]);
+            rut_DelMedico = (String) jtbl_citas.getValueAt(selectedRow, 4);
+            
+            
+            
             MetodoAnularCita metodos = new MetodoAnularCita();
             // Confirmar la acción de anulación
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro desea anular la cita?", "Anular Cita", JOptionPane.YES_NO_OPTION);
-            if (opcion == JOptionPane.YES_OPTION) {
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro desea anular la cita?", "Anular Cita", 0);
+            if (opcion == 0) {
                 // Anular la cita
                 metodos.anularCita(idCita);
-                JOptionPane.showMessageDialog(this, "Cita anulada exitosamente.");
+                metodos.establerEstado(rut_DelMedico, dia, mes, ano, hora);
+                JOptionPane.showMessageDialog(null, "Cita anulada exitosamente.", "Anular Cita",1);
                 // Recargar las citas del usuario
                 cargarCitas(rutUsuario);
             } else {
-                JOptionPane.showMessageDialog(this, "Acción de anulación cancelada.");
+                JOptionPane.showMessageDialog(null, "Acción de anulación cancelada.","Anular Cita",2);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para anular.");
+            JOptionPane.showMessageDialog(null, "Seleccione una cita para anular.","Anular Cita",2);
         }
     }//GEN-LAST:event_jbtn_anularActionPerformed
 
@@ -158,9 +190,6 @@ public class AnularCita extends javax.swing.JFrame {
 
     // Llama a la función para cargar las citas del usuario
     cargarCitas(rutUsuario);
-
-    // Si se necesita limpiar el RUT después de cargar las citas, puedes hacerlo aquí
-    limpiarRut();
         
     }//GEN-LAST:event_jbtn_okActionPerformed
 
@@ -231,7 +260,4 @@ public class AnularCita extends javax.swing.JFrame {
     private javax.swing.JTextField jtxt_rutDelUsuario;
     // End of variables declaration//GEN-END:variables
 
-    private String limpiarRut() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
