@@ -73,6 +73,14 @@ public class Cita {
     public String toString() {
         return "Cita{" + "idCita=" + idCita + ", numRutUsuario=" + numRutUsuario + ", numRutMedico=" + numRutMedico + ", fechaCita=" + fechaCita + ", horaCita=" + horaCita + '}';
     }
+
+    public void setRutUsuario(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setRutMedico(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
 
