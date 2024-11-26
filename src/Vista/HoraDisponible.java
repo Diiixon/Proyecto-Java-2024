@@ -7,7 +7,9 @@ package Vista;
 import Controlador.Metodos;
 import Modelo.Especialidad;
 import Modelo.Horario;
+import Modelo.Medico;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +27,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         setSize(900,600);
         setResizable(false);
         setLocationRelativeTo(null);
-        me.RellenarCombo("MEDICO", "NOMBRE_MEDICO", this.jcbx_medico);
+        
         
     }
 
@@ -46,8 +48,14 @@ public class HoraDisponible extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtb_Disponible = new javax.swing.JTable();
         jbtn_Mostrar = new javax.swing.JButton();
-        jcbx_medico = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        jtxt_fecha = new javax.swing.JTextField();
+        jtxt_hora = new javax.swing.JTextField();
+        jtxt_nombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jtxt_estado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,12 +86,32 @@ public class HoraDisponible extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Hora", "Rut Doctor", "Estado"
+                "Fecha", "Hora", "Rut Doctor", "Nombre ", "Especialidad", "Estado"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtb_Disponible.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtb_DisponibleMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtb_Disponible);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 710, 160));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 710, 160));
 
         jbtn_Mostrar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_Mostrar.setText("Mostrar");
@@ -92,14 +120,40 @@ public class HoraDisponible extends javax.swing.JFrame {
                 jbtn_MostrarActionPerformed(evt);
             }
         });
-        jPanel4.add(jbtn_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, -1, -1));
+        jPanel4.add(jbtn_Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, 130, 40));
 
-        jcbx_medico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
-        jPanel4.add(jcbx_medico, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 310, 30));
+        jtxt_fecha.setEditable(false);
+        jtxt_fecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_fechaActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jtxt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 160, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Médico");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, -1, -1));
+        jtxt_hora.setEditable(false);
+        jPanel4.add(jtxt_hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 160, -1));
+
+        jtxt_nombre.setEditable(false);
+        jPanel4.add(jtxt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 130, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Fecha:");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Hora:");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("Nombre:");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Estado:");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, -1));
+
+        jtxt_estado.setEditable(false);
+        jPanel4.add(jtxt_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 150, -1));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
@@ -109,7 +163,7 @@ public class HoraDisponible extends javax.swing.JFrame {
     private void jbtn_MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_MostrarActionPerformed
         // TODO add your handling code here:
         
-        String numrut,estado,hora;
+        String numrut,estado,hora,nombre = "",especialidad;
         int dia,mes,ano;
         
         DefaultTableModel modelo = (DefaultTableModel) this.jtb_Disponible.getModel();
@@ -124,16 +178,50 @@ public class HoraDisponible extends javax.swing.JFrame {
             mes = horario.getMes();
             ano = horario.getAno();
             
-            if (estado == "1") {
+            if ("1".equals(estado)) {
                 estado = "Disponible"; 
             }else{
                 estado = "Reservado";
             }
             
-            modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,estado});
+            ArrayList<Medico> lista_medico = me.buscarMedico(numrut);
+            Medico medico = me.BuscarMedicoPorRut(lista_medico, numrut);
+            
+            nombre = medico.getNombre();
+            especialidad = medico.getDescEspecialidad();
+            
+            modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,nombre,especialidad,estado});
         }
         
     }//GEN-LAST:event_jbtn_MostrarActionPerformed
+
+    private void jtb_DisponibleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_DisponibleMouseClicked
+        // TODO add your handling code here:
+        
+        int fila = jtb_Disponible.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "No se eligio fila");
+            
+        }else{
+            String fecha = (String) jtb_Disponible.getValueAt(fila,0);
+            String hora = (String) jtb_Disponible.getValueAt(fila,1);
+            String RutDoc = (String) jtb_Disponible.getValueAt(fila,2);
+            String nombre = (String) jtb_Disponible.getValueAt(fila,3);
+            String especialidad = (String) jtb_Disponible.getValueAt(fila,4);
+            String estado = (String) jtb_Disponible.getValueAt(fila,5);
+            
+            jtxt_estado.setText(estado);
+            jtxt_fecha.setText(fecha);
+            jtxt_nombre.setText(nombre);
+            jtxt_hora.setText(hora);    
+        }
+        
+        
+    }//GEN-LAST:event_jtb_DisponibleMouseClicked
+
+    private void jtxt_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_fechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_fechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,13 +261,19 @@ public class HoraDisponible extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtn_Mostrar;
-    private javax.swing.JComboBox<String> jcbx_medico;
     private javax.swing.JTable jtb_Disponible;
+    private javax.swing.JTextField jtxt_estado;
+    private javax.swing.JTextField jtxt_fecha;
+    private javax.swing.JTextField jtxt_hora;
+    private javax.swing.JTextField jtxt_nombre;
     // End of variables declaration//GEN-END:variables
 }
