@@ -15,19 +15,23 @@ public class Cita {
     private String numRutMedico;
     private String fechaCita;
     private String horaCita;
+    private Horario horario;
     
     
 
     public Cita() {
     }
 
-    public Cita(int idCita, String numRutUsuario, String numRutMedico, String fechaCita, String horaCita) {
+    public Cita(int idCita, String numRutUsuario, String numRutMedico, String fechaCita, String horaCita, Horario horario) {
         this.idCita = idCita;
         this.numRutUsuario = numRutUsuario;
         this.numRutMedico = numRutMedico;
         this.fechaCita = fechaCita;
         this.horaCita = horaCita;
+        this.horario = horario;
     }
+
+    
 
     public int getIdCita() {
         return idCita;
@@ -69,39 +73,22 @@ public class Cita {
         this.horaCita = horaCita;
     }
 
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Horario horario) {
+        this.horario = horario;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Cita{" + "idCita=" + idCita + ", numRutUsuario=" + numRutUsuario + ", numRutMedico=" + numRutMedico + ", fechaCita=" + fechaCita + ", horaCita=" + horaCita + '}';
     }
 
-    public void setRutUsuario(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    public void setRutMedico(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getRutDoctor() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int getDia() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int getMes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int getAno() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getHora() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }
 
 

@@ -105,6 +105,11 @@ public class RegistrarMedico extends javax.swing.JFrame {
 
         jbtn_cancelar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_cancelar.setText("Cancelar");
+        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_cancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(jbtn_cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
@@ -127,10 +132,26 @@ public class RegistrarMedico extends javax.swing.JFrame {
         
         Medico medico = new Medico(especialidad, rut, nombre, correo, telefono);
         Metodos metodos = new Metodos();
-        metodos.registrarMedico(medico);
+        if (metodos.registrarMedico(medico) == false) {
+            JOptionPane.showMessageDialog(null, "El médico con el RUT " + rut + " ya está registrado.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Médico Registrado Correctamente", "Registro Médico", JOptionPane.INFORMATION_MESSAGE);
+        }
         
-        JOptionPane.showMessageDialog(null, "Médico registrado correctamente!","Registrar Médico",1);
+        this.jtxt_rut.setText("");
+        this.jtxt_nombre.setText("");
+        this.jtxt_correo.setText("");
+        this.jtxt_telefono.setText("");
+        this.jtxt_rut.requestFocus();
+        
+        
     }//GEN-LAST:event_jbtn_guardarActionPerformed
+
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
     /**
      * @param args the command line arguments

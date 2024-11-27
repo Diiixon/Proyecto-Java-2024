@@ -168,7 +168,8 @@ public class IngresarHorario extends javax.swing.JFrame {
         
         metodos.agregarHoras(horario);
         
-        JOptionPane.showMessageDialog(null, "Hora registrada correctamente!","Hora Registrada",0);
+        JOptionPane.showMessageDialog(null, "Hora registrada correctamente!","Hora Registrada", JOptionPane.ERROR_MESSAGE);
+        
     }//GEN-LAST:event_jbtn_guardarActionPerformed
 
     /**

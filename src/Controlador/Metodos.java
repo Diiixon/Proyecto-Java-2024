@@ -1,7 +1,6 @@
 package Controlador;
 
 import BaseDatos.ConexionBaseDatos;
-//import Modelo.Cita;
 import Modelo.Usuario;
 import Modelo.Medico;
 import Modelo.Especialidad;
@@ -24,6 +23,24 @@ public class Metodos {
     public boolean registrarUsuario(Usuario usuario) {
         try {
             Connection conex = ConexionBaseDatos.conectar();
+            
+
+            String checkQuery = "SELECT COUNT(*) FROM USUARIO WHERE NUMRUT_USUARIO = ?";
+            PreparedStatement checkStmt = conex.prepareStatement(checkQuery);
+            checkStmt.setString(1, usuario.getNumRut());
+
+            ResultSet rs = checkStmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+
+            if (count > 0) {
+
+                System.out.println("El usuario con el RUT " + usuario.getNumRut() + " ya está registrado.");
+                rs.close();
+                checkStmt.close();
+                conex.close();
+                return false; // 
+            }
 
             String query = "INSERT INTO USUARIO (DIA_NAC_USUARIO,MES_NAC_USUARIO,ANO_NAC_USUARIO,NUMRUT_USUARIO,NOMBRE_USUARIO,CORREO_USUARIO,TELEFONO_USUARIO) VALUES (?,?,?,?,?,?,?)";
             PreparedStatement stmt = conex.prepareStatement(query);
@@ -226,8 +243,15 @@ public class Metodos {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Error en SQL al eliminar Usuario" + e.getMessage());
+            
+            if (e.getMessage().contains("a foreign key constraint fails")) {
+            JOptionPane.showMessageDialog(null,"No se puede eliminar el Usuario porque está siendo utilizado en otros registros (Tiene Citas asignados).","Error de eliminación", JOptionPane.ERROR_MESSAGE);
             return false;
+            }
+            else {
+            JOptionPane.showMessageDialog(null,"Error en SQL al eliminar Usuario: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         } catch (Exception e) {
             System.out.println("Error en el método eliminar Usuario" + e.getMessage());
             return false;
@@ -250,8 +274,15 @@ public class Metodos {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Error en SQL al eliminar Medico" + e.getMessage());
+            
+            if (e.getMessage().contains("a foreign key constraint fails")) {
+            JOptionPane.showMessageDialog(null,"No se puede eliminar el Médico porque está siendo utilizado en otros registros (Tiene horarios asignados).","Error de eliminación", JOptionPane.ERROR_MESSAGE);
             return false;
+            }
+            else {
+            JOptionPane.showMessageDialog(null,"Error en SQL al eliminar Médico: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         } catch (Exception e) {
             System.out.println("Error en el método eliminar Medico" + e.getMessage());
             return false;
@@ -274,8 +305,15 @@ public class Metodos {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Error en SQL al eliminar Especialidad" + e.getMessage());
+            
+            if (e.getMessage().contains("a foreign key constraint fails")) {
+            JOptionPane.showMessageDialog(null,"No se puede eliminar la Especialidad porque está siendo utilizado en otros registros (Tiene Médicos asignados).","Error de eliminación", JOptionPane.ERROR_MESSAGE);
             return false;
+            }
+            else {
+            JOptionPane.showMessageDialog(null,"Error en SQL al eliminar Especialidad: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         } catch (Exception e) {
             System.out.println("Error en el método eliminar Especialidad" + e.getMessage());
             return false;
@@ -433,13 +471,14 @@ public class Metodos {
         try {
             Connection conex = ConexionBaseDatos.conectar();
 
-            String sql = "SELECT DIA_HORARIO, MES_HORARIO, ANO_HORARIO, HORA, NUMRUT_MEDICO, ESTADO FROM HORARIO;";
+            String sql = "SELECT ID_HORARIO,DIA_HORARIO, MES_HORARIO, ANO_HORARIO, HORA, NUMRUT_MEDICO, ESTADO FROM HORARIO;";
             PreparedStatement stmt = conex.prepareStatement(sql);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Horario horario = new Horario();
+                horario.setIdHorario(rs.getInt("ID_HORARIO"));
                 horario.setDia(rs.getInt("DIA_HORARIO"));
                 horario.setMes(rs.getInt("MES_HORARIO"));
                 horario.setAno(rs.getInt("ANO_HORARIO"));
@@ -525,20 +564,21 @@ public class Metodos {
 
     }
 
-    public void AgregarCita(String Fecha, String rut_doc, String rut_usu, String hora) {
+    public void AgregarCita(int idHora, String Fecha, String rut_doc, String rut_usu, String hora) {
 
         try {
 
             Connection conex = ConexionBaseDatos.conectar();
 
-            String query = "INSERT INTO CITA (FECHA_CITA, NUMRUT_USUARIO, NUMRUT_MEDICO, HORA_CITA) VALUES (?,?,?,?)";
+            String query = "INSERT INTO CITA (ID_HORARIO, FECHA_CITA, NUMRUT_USUARIO, NUMRUT_MEDICO, HORA_CITA) VALUES (?,?,?,?,?)";
 
             PreparedStatement stmt = conex.prepareStatement(query);
-
-            stmt.setString(1, Fecha);
-            stmt.setString(2, rut_usu);
-            stmt.setString(3, rut_doc);
-            stmt.setString(4, hora);
+            
+            stmt.setInt(1, idHora);
+            stmt.setString(2, Fecha);
+            stmt.setString(3, rut_usu);
+            stmt.setString(4, rut_doc);
+            stmt.setString(5, hora);
 
             stmt.executeUpdate();
             stmt.close();
@@ -658,7 +698,7 @@ public class Metodos {
 
         return nombreUsuario;
     }
-    
+
     public String obtenerNombreMedico(String rut) {
         String nombreMedico = null;
 
@@ -678,6 +718,31 @@ public class Metodos {
         }
 
         return nombreMedico;
+    }
+    
+    public int obtenerIdHorarioMedico(String rut, int dia, int mes, int ano, String hora) {
+        int idHorario = 0;
+
+        String sql = "SELECT ID_HORARIO FROM HORARIO WHERE NUMRUT_MEDICO = ? AND DIA_HORARIO = ? AND MES_HORARIO = ? AND ANO_HORARIO = ? AND HORA = ?";
+
+        try (Connection conex = ConexionBaseDatos.conectar(); PreparedStatement stmt = conex.prepareStatement(sql)) {
+
+            stmt.setString(1, rut);
+            stmt.setInt(2, dia);
+            stmt.setInt(3, mes);
+            stmt.setInt(4, ano);
+            stmt.setString(5, hora);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    idHorario = Integer.parseInt(rs.getString("ID_HORARIO"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idHorario;
     }
 
 }

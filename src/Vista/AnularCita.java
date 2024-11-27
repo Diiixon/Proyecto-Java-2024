@@ -42,7 +42,7 @@ public class AnularCita extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtxt_rutDelUsuario = new javax.swing.JTextField();
-        jbtn_ok = new javax.swing.JButton();
+        jbtn_buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_citas = new javax.swing.JTable();
         jbtn_cancelar = new javax.swing.JButton();
@@ -75,14 +75,14 @@ public class AnularCita extends javax.swing.JFrame {
         });
         jPanel2.add(jtxt_rutDelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 290, 30));
 
-        jbtn_ok.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jbtn_ok.setText("Buscar");
-        jbtn_ok.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_buscar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jbtn_buscar.setText("Buscar");
+        jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_okActionPerformed(evt);
+                jbtn_buscarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbtn_ok, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, 30));
+        jPanel2.add(jbtn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, 30));
 
         jtbl_citas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,8 +137,8 @@ public class AnularCita extends javax.swing.JFrame {
     private void jbtn_anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_anularActionPerformed
         // TODO add your handling code here:
     // Obtener el RUT del usuario desde el campo de texto
+        Metodos meto = new Metodos();
         String rutUsuario = jtxt_rutDelUsuario.getText();
-        
         int dia = 0;
         int mes= 0;
         int ano = 0;
@@ -156,16 +156,15 @@ public class AnularCita extends javax.swing.JFrame {
             dia = Integer.parseInt(partefecha[0]);
             mes = Integer.parseInt(partefecha[1]);
             ano = Integer.parseInt(partefecha[2]);
-            rut_DelMedico = (String) jtbl_citas.getValueAt(selectedRow, 4);
-            
-            
+            String nombreDoc = (String) jtbl_citas.getValueAt(selectedRow, 4);
+            rut_DelMedico = meto.obtenerRutMedico(nombreDoc);
             
             MetodoAnularCita metodos = new MetodoAnularCita();
             // Confirmar la acción de anulación
             int opcion = JOptionPane.showConfirmDialog(this, "¿Seguro desea anular la cita?", "Anular Cita", 0);
             if (opcion == 0) {
                 // Anular la cita
-                metodos.anularCita(idCita);
+                metodos.anularCita(idCita, hora, dia, mes, ano, rut_DelMedico);
                 metodos.establerEstado(rut_DelMedico, dia, mes, ano, hora);
                 JOptionPane.showMessageDialog(null, "Cita anulada exitosamente.", "Anular Cita",1);
                 // Recargar las citas del usuario
@@ -184,7 +183,7 @@ public class AnularCita extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jtxt_rutDelUsuarioActionPerformed
 
-    private void jbtn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_okActionPerformed
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
         // TODO add your handling code here:
         String rutUsuario = jtxt_rutDelUsuario.getText();
 
@@ -197,7 +196,7 @@ public class AnularCita extends javax.swing.JFrame {
     // Llama a la función para cargar las citas del usuario
     cargarCitas(rutUsuario);
         
-    }//GEN-LAST:event_jbtn_okActionPerformed
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
 
     private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
         // TODO add your handling code here:
@@ -217,6 +216,7 @@ public class AnularCita extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se registran citas para el RUT proporcionado.");
         } else {
             for (Cita cita : citas) {
+                
                 modelo.addRow(new Object[]{cita.getIdCita(), metodo.obtenerNombreUsuario(rutUsuario), cita.getFechaCita(), cita.getHoraCita(),metodo.obtenerNombreMedico(rutUsuario)});
             }
         }
@@ -262,8 +262,8 @@ public class AnularCita extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtn_anular;
+    private javax.swing.JButton jbtn_buscar;
     private javax.swing.JButton jbtn_cancelar;
-    private javax.swing.JButton jbtn_ok;
     private javax.swing.JTable jtbl_citas;
     private javax.swing.JTextField jtxt_rutDelUsuario;
     // End of variables declaration//GEN-END:variables

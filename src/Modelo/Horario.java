@@ -10,7 +10,7 @@ import java.util.Date;
 public class Horario {
     
     private String numRut;
-    private int dia,mes,ano;
+    private int dia,mes,ano,idHorario;
     private String estado; 
     private String hora;
     
@@ -19,15 +19,18 @@ public class Horario {
     public Horario() {
     }
 
-    public Horario(String numRut, int dia, int mes, int ano, String estado, String hora, Medico medico) {
+    public Horario(String numRut, int dia, int mes, int ano, int idHorario, String estado, String hora, Medico medico) {
         this.numRut = numRut;
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
+        this.idHorario = idHorario;
         this.estado = estado;
         this.hora = hora;
         this.medico = medico;
     }
+
+    
 
     public String getNumRut() {
         return numRut;
@@ -84,6 +87,16 @@ public class Horario {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
+
+    public int getIdHorario() {
+        return idHorario;
+    }
+
+    public void setIdHorario(int idHorario) {
+        this.idHorario = idHorario;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -36,16 +36,13 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtxt_idEspecialidad = new javax.swing.JTextField();
         jtxt_descripcion = new javax.swing.JTextField();
         jbtn_guardar = new javax.swing.JButton();
         jbtn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrando Especialidad");
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel1.setBackground(new java.awt.Color(167, 219, 216));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,15 +71,10 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 60));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("ID Especialidad:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Descripción:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
-        jPanel1.add(jtxt_idEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 310, 30));
-        jPanel1.add(jtxt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 310, 30));
+        jLabel3.setText("Nombre Especialidad:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        jPanel1.add(jtxt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, 310, 30));
 
         jbtn_guardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtn_guardar.setText("Guardar");
@@ -110,7 +102,7 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -125,16 +117,21 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
     private void jbtn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_guardarActionPerformed
         // TODO add your handling code here:
         
-        String id;
+//        String id;
         String descripcion;
         
-        id = this.jtxt_idEspecialidad.getText();
+//        id = this.jtxt_idEspecialidad.getText();
         descripcion = this.jtxt_descripcion.getText();
         
-        Especialidad especialidad = new Especialidad(id, descripcion);
+        Especialidad especialidad = new Especialidad(null, descripcion);
         Metodos metodos = new Metodos();
-        metodos.registrarEspecialidad(especialidad);
-        JOptionPane.showMessageDialog(null, "Registro Especialidad Correcto!","Registro",1);
+        if (metodos.registrarEspecialidad(especialidad) == false) {
+            JOptionPane.showMessageDialog(null, "La Especialidad " +descripcion+ " ya está registrada.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Especialidad Registrada Correctamente", "Registro Especialidad", JOptionPane.INFORMATION_MESSAGE);
+        }
+        this.jtxt_descripcion.setText("");
+        
     }//GEN-LAST:event_jbtn_guardarActionPerformed
 
     /**
@@ -174,13 +171,11 @@ public class RegistrarEspecialidad extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtn_cancelar;
     private javax.swing.JButton jbtn_guardar;
     private javax.swing.JTextField jtxt_descripcion;
-    private javax.swing.JTextField jtxt_idEspecialidad;
     // End of variables declaration//GEN-END:variables
 }

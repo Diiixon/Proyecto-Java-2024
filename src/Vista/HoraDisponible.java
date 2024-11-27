@@ -66,6 +66,8 @@ public class HoraDisponible extends javax.swing.JFrame {
         jbtn_reservar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jtxt_rutdoc = new javax.swing.JTextField();
+        jtxt_idHora = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,14 +98,14 @@ public class HoraDisponible extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Hora", "Rut Doctor", "Nombre ", "Especialidad", "Estado"
+                "ID Horario", "Fecha", "Hora", "Rut Doctor", "Nombre ", "Especialidad", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -166,6 +168,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         jPanel4.add(jtxt_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 160, -1));
 
         jcbx_especialidad.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jcbx_especialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione --" }));
         jPanel4.add(jcbx_especialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 220, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -223,6 +226,11 @@ public class HoraDisponible extends javax.swing.JFrame {
 
         jtxt_rutdoc.setEditable(false);
         jPanel4.add(jtxt_rutdoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, 160, -1));
+        jPanel4.add(jtxt_idHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 160, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Id Hora:");
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 900, 540));
 
@@ -233,7 +241,7 @@ public class HoraDisponible extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String numrut,estado,hora,nombre = "",especialidad;
-        int dia,mes,ano;
+        int dia,mes,ano,idHorario;
         
         DefaultTableModel modelo = (DefaultTableModel) this.jtb_Disponible.getModel();
         
@@ -249,6 +257,7 @@ public class HoraDisponible extends javax.swing.JFrame {
             dia = horario.getDia();
             mes = horario.getMes();
             ano = horario.getAno();
+            idHorario = horario.getIdHorario();
             
             if ("1".equals(estado)) {
                 estado = "Disponible"; 
@@ -267,7 +276,7 @@ public class HoraDisponible extends javax.swing.JFrame {
             especialidad = medico.getDescEspecialidad();
             
             if (jcbx_especialidad.getSelectedItem().equals(especialidad)) {
-                modelo.addRow(new Object [] {dia+"/"+mes+"/"+ano,hora,numrut,nombre,especialidad,estado});
+                modelo.addRow(new Object [] {idHorario,dia+"/"+mes+"/"+ano,hora,numrut,nombre,especialidad,estado});
             }
         } 
     }//GEN-LAST:event_jbtn_MostrarActionPerformed
@@ -280,13 +289,15 @@ public class HoraDisponible extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se eligio fila");
             
         }else{
-            String fecha = (String) jtb_Disponible.getValueAt(fila,0);
-            String hora = (String) jtb_Disponible.getValueAt(fila,1);
-            String RutDoc = (String) jtb_Disponible.getValueAt(fila,2);
-            String nombre = (String) jtb_Disponible.getValueAt(fila,3);
-            String especialidad = (String) jtb_Disponible.getValueAt(fila,4);
-            String estado = (String) jtb_Disponible.getValueAt(fila,5);
+            int idHora = (Integer) jtb_Disponible.getValueAt(fila, 0);
+            String fecha = (String) jtb_Disponible.getValueAt(fila,1);
+            String hora = (String) jtb_Disponible.getValueAt(fila,2);
+            String RutDoc = (String) jtb_Disponible.getValueAt(fila,3);
+            String nombre = (String) jtb_Disponible.getValueAt(fila,4);
+            String especialidad = (String) jtb_Disponible.getValueAt(fila,5);
+            String estado = (String) jtb_Disponible.getValueAt(fila,6);
             
+            jtxt_idHora.setText(String.valueOf(idHora));
             jtxt_estado.setText(estado);
             jtxt_fecha.setText(fecha);
             jtxt_nombre.setText(nombre);
@@ -332,10 +343,13 @@ public class HoraDisponible extends javax.swing.JFrame {
 
     private void jbtn_reservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_reservarActionPerformed
         // TODO add your handling code here:
+        
         int dia = 0;
         int mes = 0;
         int ano = 0;
         String fecha = jtxt_fecha.getText();
+        int idHora = Integer.parseInt(this.jtxt_idHora.getText());
+        
         
         try {
             String [] partesfecha = fecha.split("/");
@@ -351,12 +365,15 @@ public class HoraDisponible extends javax.swing.JFrame {
         if (jtxt_estado.getText().equalsIgnoreCase("Reservado")) {
             JOptionPane.showMessageDialog(null, "Seleccione una hora disponible ","Error",0);  
         }
-        String rutDoc = jtxt_rutdoc.getText();
+        else
+        {
+            String rutDoc = jtxt_rutdoc.getText();
         me.ReservarHora(rutDoc, dia, mes, ano,jtxt_hora.getText());
         
-        me.AgregarCita(jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
+        me.AgregarCita(idHora,jtxt_fecha.getText(), jtxt_rutdoc.getText(), jtxt_rutcliente.getText(), jtxt_hora.getText());
         
         JOptionPane.showMessageDialog(null, "Reserva Médica Realizada","Reserva",1);
+        }
         
 
         
@@ -408,6 +425,7 @@ public class HoraDisponible extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -421,6 +439,7 @@ public class HoraDisponible extends javax.swing.JFrame {
     private javax.swing.JTextField jtxt_estado;
     private javax.swing.JTextField jtxt_fecha;
     private javax.swing.JTextField jtxt_hora;
+    private javax.swing.JTextField jtxt_idHora;
     private javax.swing.JTextField jtxt_nombre;
     private javax.swing.JTextField jtxt_rutcliente;
     private javax.swing.JTextField jtxt_rutdoc;

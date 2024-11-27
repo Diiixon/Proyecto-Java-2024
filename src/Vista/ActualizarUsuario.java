@@ -155,6 +155,7 @@ public class ActualizarUsuario extends javax.swing.JFrame {
             this.jtxt_ano.setText(String.valueOf(ano));
             this.jtxt_correo.setText(correo);
             this.jtxt_telefono.setText(String.valueOf(telefono));
+            this.jtxt_buscarRut.setEnabled(false);
             
         }else{
             JOptionPane.showMessageDialog(this, "Persona no Existe", "Actualizar", 2);

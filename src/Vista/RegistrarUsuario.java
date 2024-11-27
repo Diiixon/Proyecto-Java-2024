@@ -4,7 +4,6 @@
  */
 package Vista;
 
-
 import Controlador.Metodos;
 import Modelo.Usuario;
 import java.text.SimpleDateFormat;
@@ -22,7 +21,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
      */
     public RegistrarUsuario() {
         initComponents();
-        setSize(900,600);
+        setSize(900, 600);
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -202,10 +201,10 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
     private void jbtn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_guardarActionPerformed
         // TODO add your handling code here:
-        
+
         String rut, nombre, correo;
-        int dia, mes, ano,telefono;
-        
+        int dia, mes, ano, telefono;
+
         rut = this.jtxt_rut.getText();
         nombre = this.jtxt_nombre.getText();
         correo = this.jtxt_correo.getText();
@@ -213,12 +212,27 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         dia = Integer.parseInt(this.jtxt_dia.getText());
         mes = Integer.parseInt(this.jtxt_mes.getText());
         ano = Integer.parseInt(this.jtxt_ano.getText());
-        
+
         Usuario usuario = new Usuario(dia, mes, ano, rut, nombre, correo, telefono);
         Metodos metodos = new Metodos();
-        metodos.registrarUsuario(usuario);
-        JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente", "Registro",1);
+//        metodos.registrarUsuario(usuario);
         
+        if (metodos.registrarUsuario(usuario) == false) {
+            JOptionPane.showMessageDialog(null, "El usuario con el RUT " + rut + " ya está registrado.", "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "Usuario Registrado Correctamente", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        this.jtxt_rut.setText("");
+        this.jtxt_nombre.setText("");
+        this.jtxt_correo.setText("");
+        this.jtxt_telefono.setText("");
+        this.jtxt_dia.setText("");
+        this.jtxt_mes.setText("");
+        this.jtxt_ano.setText("");
+        this.jtxt_rut.requestFocus();
+
     }//GEN-LAST:event_jbtn_guardarActionPerformed
 
     /**
